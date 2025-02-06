@@ -24,101 +24,165 @@ import {
 } from "@/components/ui/sheet";
 
 import logo from "../assets/logo.png";
-
+import { Dialog, DialogContent, DialogHeader, DialogFooter } from "./ui/dialog"; // Importing Modal
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogoutUserMutation } from "@/features/api/authApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
+
 const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
   const logoutHandler = async () => {
-    await logoutUser();
+    setShowLogoutConfirm(true);
   };
-  console.log(user);
+
+  const confirmLogout = async () => {
+    await logoutUser();
+    setShowLogoutConfirm(false);
+  };
+
   useEffect(() => {
     if (isSuccess) {
-      toast.success(data.message || "User Logout!");
+      toast.success(data.message || "Logged Out Successfully", {
+        style: { color: "green" },
+      });
       navigate("/login");
     }
   }, [isSuccess]);
 
   return (
-    <div className="h-16 dark:bg-[#020817] bg-white border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 right-0 duration-300 z-10">
-      <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full">
-        <div className="flex items-center gap-4">
-          <Avatar className="h-20 w-20 md:h-25 md:w-25 lg:h-24 lg:w-24">
-            <AvatarImage
-              className="h-full w-full object-cover"
-              src={logo}
-              alt="Logo"
-            />
-            <AvatarFallback>SV</AvatarFallback>
-          </Avatar>
-          <h1 className="hidden md:block font-extrabold text-2xl">
-            StudyVerse
-          </h1>
+    <>
+      <div className="h-16 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200 dark:bg-gray-900 border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 right-0 duration-300 z-10 shadow-md">
+        <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full px-6">
+          {/* Logo & Title */}
+          <div className="flex items-center gap-3">
+            <Avatar className="h-20 w-20 mt-3">
+              <AvatarImage
+                className="h-full w-full object-contain"
+                src={logo}
+                alt="Logo"
+              />
+              <AvatarFallback>SV</AvatarFallback>
+            </Avatar>
+            <h1 className="font-extrabold text-2xl text-gray-800 dark:text-white">
+              StudyVerse
+            </h1>
+          </div>
+
+          {/* Navbar */}
+          <div className="flex items-center gap-8">
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="h-12 w-12 cursor-pointer">
+                    <AvatarImage
+                      src={
+                        user?.photoUrl ||
+                        "https://imgs.search.brave.com/ULdUqCYl85mL4y5vUutulLJAS7dxYXur9W2TvaKEDLI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9hdmF0/YXIuaXJhbi5saWFy/YS5ydW4vcHVibGlj/LzE0.jpeg"
+                      }
+                    />
+                    <AvatarFallback>Avatar</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      <Link to="my-learning"> My Learning</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link to="profile"> Edit Profile</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={logoutHandler}>
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  {user?.role === "instructor" && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <Link to="/admin/dashboard">Dashboard</Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/login")}
+                  className="text-gray-800 border-gray-800 dark:text-white dark:border-white hover:bg-gray-300 dark:hover:bg-gray-700"
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/signup")}
+                  className="text-gray-800 border-gray-800 dark:text-white dark:border-white hover:bg-gray-300 dark:hover:bg-gray-700"
+                >
+                  Signup
+                </Button>
+              </div>
+            )}
+            <DarkMode />
+          </div>
         </div>
 
-        <div className="flex items-center gap-8">
-          {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar className="h-12 w-12">
-                  <AvatarImage
-                    src={
-                      user?.photoUrl ||
-                      "https://imgs.search.brave.com/ULdUqCYl85mL4y5vUutulLJAS7dxYXur9W2TvaKEDLI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9hdmF0/YXIuaXJhbi5saWFy/YS5ydW4vcHVibGlj/LzE0.jpeg"
-                    }
-                  />
-                  <AvatarFallback>Avatar</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <Link to="my-learning"> My Learning</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link to="profile"> Edit Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={logoutHandler}>
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                {user?.role === "instructor" && (
-                  <>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                      <Link to="/admin/dashboard">Dashboard</Link>
-                    </DropdownMenuItem>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <div className="flex item-center gap-2">
-              <Button variant="outline" onClick={() => navigate("/login")}>
-                Login
-              </Button>
-              <Button variant="outline" onClick={() => navigate("/signup")}>
-                Signup
-              </Button>
-            </div>
-          )}
-          <DarkMode />
+        {/* Mobile View */}
+        <div className="flex md:hidden items-center justify-between px-4 h-full">
+          <div className="flex items-center gap-2">
+            <Avatar className="h-12 w-12">
+              <AvatarImage
+                className="h-full w-full object-cover"
+                src={logo}
+                alt="Logo"
+              />
+              <AvatarFallback>SV</AvatarFallback>
+            </Avatar>
+            <h1 className="font-extrabold text-xl text-gray-800 dark:text-white">
+              StudyVerse
+            </h1>
+          </div>
+          <MobileNavbar />
         </div>
       </div>
-      <div className="flex md:hidden items-center justify-between px-4 h-full">
-        <h1 className="font-extrabold text-2xl">StudyVerse</h1>
-        <MobileNavbar />
-      </div>
-    </div>
+
+      {/* Logout */}
+      {showLogoutConfirm && (
+        <Dialog open={showLogoutConfirm} onOpenChange={setShowLogoutConfirm}>
+          <DialogContent className="p-6">
+            <DialogHeader>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                Are you sure you want to logout?
+              </h3>
+            </DialogHeader>
+            <DialogFooter className="flex justify-end gap-4 mt-4">
+              <Button
+                variant="outline"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="text-gray-800 border-gray-800 dark:text-white dark:border-white hover:bg-gray-300 dark:hover:bg-gray-700"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={confirmLogout}
+                className="bg-red-500 text-white hover:bg-red-700"
+              >
+                Yes
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   );
 };
 
@@ -131,7 +195,7 @@ const MobileNavbar = () => {
       <SheetTrigger asChild>
         <Button
           size="icon"
-          className="rounded-full bg-gray-200 hover: bg-gray-200 "
+          className="rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
           variant="outline"
         >
           <Menu />

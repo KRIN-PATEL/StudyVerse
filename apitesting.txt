@@ -1,0 +1,12 @@
+
+http://localhost:1552/api/v1/user/login
+
+{
+    "email": "yashjaganiwork@gmail.com",
+    "password":"12345678"
+}
+
+{
+    "email": "okayextraa@gmail.com",
+    "password":"12312312"
+}

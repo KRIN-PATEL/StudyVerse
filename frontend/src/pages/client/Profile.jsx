@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  // DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import Course from "./Course";
+// import { Loader2 } from "lucide-react";
+import  { useEffect, useState } from "react";
+// import Course from "./Course";
 import {
   useLoadUserQuery,
   useUpdateUserMutation,
@@ -25,31 +25,11 @@ const Profile = () => {
   const [profilePhoto, setProfilePhoto] = useState("");
 
   const { data, isLoading, refetch } = useLoadUserQuery();
+
   const [
     updateUser,
-    {
-      data: updateUserData,
-      isLoading: updateUserIsLoading,
-      isError,
-      error,
-      isSuccess,
-    },
+    { data: updateUserData, isLoading: updateUserIsLoading, isError, error, isSuccess },
   ] = useUpdateUserMutation();
-
-  console.log(data);
-
-  const onChangeHandler = (e) => {
-    const file = e.target.files?.[0];
-    if (file) setProfilePhoto(file);
-  };
-
-  const updateUserHandler = async () => {
-    console.log(name,profilePhoto);
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("profilePhoto", profilePhoto);
-    await updateUser(formData);
-  };
 
   useEffect(() => {
     refetch();
@@ -58,19 +38,18 @@ const Profile = () => {
   useEffect(() => {
     if (isSuccess) {
       refetch();
-      toast.success(data.message || "Profile updated.");
+      toast.success(updateUserData?.message || "Profile updated.");
     }
     if (isError) {
-      toast.error(error.message || "Failed to update profile");
+      toast.error(error?.message || "Failed to update profile");
     }
   }, [error, updateUserData, isSuccess, isError]);
 
-  if (isLoading) return <h1>Profile Loading...</h1>;
+  // **❗ Handle Loading & Undefined Data ❗**
+  if (isLoading) return <h1 className="text-center text-xl">Loading Profile...</h1>;
+  if (!data?.user) return <h1 className="text-center text-xl text-red-500">User not found.</h1>;
 
-  const user = data && data.user;
-
-  console.log(user);
-  
+  const user = data.user; // Safe assignment
 
   return (
     <div className="max-w-4xl mx-auto px-4 my-10">
@@ -78,38 +57,37 @@ const Profile = () => {
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 my-5">
         <div className="flex flex-col items-center">
           <Avatar className="h-24 w-24 md:h-32 md:w-32 mb-4">
-            <AvatarImage
-              src={user?.photoUrl || "https://github.com/shadcn.png"}
-              alt="@shadcn"
-            />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={user?.photoUrl || "https://github.com/shadcn.png"} alt="Profile" />
+            <AvatarFallback>{user?.name?.charAt(0) || "U"}</AvatarFallback>
           </Avatar>
         </div>
         <div>
           <div className="mb-2">
-            <h1 className="font-semibold text-gray-900 dark:text-gray-100 ">
+            <h1 className="font-semibold text-gray-900 dark:text-gray-100">
               Name:
               <span className="font-normal text-gray-700 dark:text-gray-300 ml-2">
-                {user.name}
+                {user?.name || "N/A"}
               </span>
             </h1>
           </div>
           <div className="mb-2">
-            <h1 className="font-semibold text-gray-900 dark:text-gray-100 ">
+            <h1 className="font-semibold text-gray-900 dark:text-gray-100">
               Email:
               <span className="font-normal text-gray-700 dark:text-gray-300 ml-2">
-                {user.email}
+                {user?.email || "N/A"}
               </span>
             </h1>
           </div>
           <div className="mb-2">
-            <h1 className="font-semibold text-gray-900 dark:text-gray-100 ">
+            <h1 className="font-semibold text-gray-900 dark:text-gray-100">
               Role:
               <span className="font-normal text-gray-700 dark:text-gray-300 ml-2">
-                {user.role.toUpperCase()}
+                {user?.role?.toUpperCase() || "N/A"}
               </span>
             </h1>
           </div>
+
+          {/* Edit Profile Dialog */}
           <Dialog>
             <DialogTrigger asChild>
               <Button size="sm" className="mt-2">
@@ -119,10 +97,7 @@ const Profile = () => {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Edit Profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when youre
-                  done.
-                </DialogDescription>
+                <p className="text-sm text-gray-500">Make changes to your profile here.</p>
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
@@ -137,43 +112,16 @@ const Profile = () => {
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label>Profile Photo</Label>
-                  <Input
-                    onChange={onChangeHandler}
-                    type="file"
-                    accept="image/*"
-                    className="col-span-3"
-                  />
+                  <Input type="file" accept="image/*" onChange={(e) => setProfilePhoto(e.target.files?.[0])} className="col-span-3" />
                 </div>
               </div>
               <DialogFooter>
-                <Button
-                  disabled={updateUserIsLoading}
-                  onClick={updateUserHandler}
-                >
-                  {updateUserIsLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
-                      wait
-                    </>
-                  ) : (
-                    "Save Changes"
-                  )}
+                <Button disabled={updateUserIsLoading} onClick={() => updateUser({ name, profilePhoto })}>
+                  {updateUserIsLoading ? "Saving..." : "Save Changes"}
                 </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
-        </div>
-      </div>
-      <div>
-        <h1 className="font-medium text-lg">Courses youre enrolled in</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5">
-          {user.enrolledCourses.length === 0 ? (
-            <h1>You havent enrolled yet</h1>
-          ) : (
-            user.enrolledCourses.map((course) => (
-              <Course course={course} key={course._id} />
-            ))
-          )}
         </div>
       </div>
     </div>
@@ -181,3 +129,6 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+// export default Profile;
