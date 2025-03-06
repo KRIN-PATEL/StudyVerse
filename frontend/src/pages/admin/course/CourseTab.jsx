@@ -83,7 +83,11 @@ const CourseTab = () => {
           course.category &&
           course.courseLevel &&
           course.coursePrice &&
+<<<<<<< HEAD
           course.lectures.length > 0 
+=======
+          course.lectures.length > 0
+>>>>>>> sprint2/main
       );
     }
   }, [courseByIdData]);
@@ -92,13 +96,22 @@ const CourseTab = () => {
     try {
       const response = await deleteCourse(courseId);
       if (response.data) {
+<<<<<<< HEAD
         toast.success(response.data.message, {style: {color: "green"}});
         navigate("/admin/course"); 
+=======
+        toast.success(response.data.message, { style: { color: "green" } });
+        navigate("/admin/course");
+>>>>>>> sprint2/main
       }
     } catch (error) {
       toast.error(error?.data?.message || "Failed to delete course");
     }
+<<<<<<< HEAD
     setShowDeleteDialog(false); 
+=======
+    setShowDeleteDialog(false);
+>>>>>>> sprint2/main
   };
   const [previewThumbnail, setPreviewThumbnail] = useState("");
   // const navigate = useNavigate();
@@ -147,26 +160,48 @@ const CourseTab = () => {
       const response = await publishCourse({ courseId, query: action });
       if (response.data) {
         refetch();
+<<<<<<< HEAD
         toast.success(response.data.message, {style: {color: "green"}});
       }
     } catch (error) {
       toast.error("Failed to publish course", {stylele: {color: "red"}});
+=======
+        toast.success(response.data.message, { style: { color: "green" } });
+      }
+    } catch (error) {
+      toast.error("Failed to publish course", { stylele: { color: "red" } });
+>>>>>>> sprint2/main
     }
   };
 
   useEffect(() => {
     if (isSuccess) {
+<<<<<<< HEAD
       toast.success(data.message || "Course updated successfully.", {style: {color: "green"}});
     }
     if (error) {
       toast.error(error.data.message || "Failed to update course", {style: {color: "red"}});
+=======
+      toast.success(data.message || "Course updated successfully.", {
+        style: { color: "green" },
+      });
+    }
+    if (error) {
+      toast.error(error.data.message || "Failed to update course", {
+        style: { color: "red" },
+      });
+>>>>>>> sprint2/main
     }
   }, [isSuccess, error]);
 
   if (courseByIdLoading) return <h1>Loading...</h1>;
 
   return (
+<<<<<<< HEAD
     <Card>
+=======
+    <Card className="">
+>>>>>>> sprint2/main
       <CardHeader className="flex flex-row justify-between">
         <div>
           <CardTitle>Basic Course Information</CardTitle>
@@ -176,7 +211,11 @@ const CourseTab = () => {
         </div>
         <div className="space-x-2">
           <Button
+<<<<<<< HEAD
           className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white"
+=======
+            className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg flex items-center gap-2"
+>>>>>>> sprint2/main
             disabled={!coursePublish}
             variant="outline"
             onClick={() =>
@@ -223,7 +262,11 @@ const CourseTab = () => {
       <CardContent>
         <div className="space-y-4 mt-5">
           <div>
+<<<<<<< HEAD
             <Label className="font-bold">Title</Label>
+=======
+            <Label>Title</Label>
+>>>>>>> sprint2/main
             <Input
               type="text"
               name="courseTitle"
@@ -233,7 +276,11 @@ const CourseTab = () => {
             />
           </div>
           <div>
+<<<<<<< HEAD
             <Label className="font-bold">Subtitle</Label>
+=======
+            <Label>Subtitle</Label>
+>>>>>>> sprint2/main
             <Input
               type="text"
               name="subTitle"
@@ -243,12 +290,20 @@ const CourseTab = () => {
             />
           </div>
           <div>
+<<<<<<< HEAD
             <Label className="font-bold">Description</Label>
+=======
+            <Label>Description</Label>
+>>>>>>> sprint2/main
             <RichTextEditor input={input} setInput={setInput} />
           </div>
           <div className="flex items-center gap-5">
             <div>
+<<<<<<< HEAD
               <Label className="font-bold">Category</Label>
+=======
+              <Label>Category</Label>
+>>>>>>> sprint2/main
               <Select
                 defaultValue={input.category}
                 onValueChange={selectCategory}
@@ -258,7 +313,11 @@ const CourseTab = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+<<<<<<< HEAD
                     <SelectLabel className="font-bold">Category</SelectLabel>
+=======
+                    <SelectLabel>Category</SelectLabel>
+>>>>>>> sprint2/main
                     <SelectItem value="Next JS">Next JS</SelectItem>
                     <SelectItem value="Data Science">Data Science</SelectItem>
                     <SelectItem value="Frontend Development">
@@ -280,7 +339,11 @@ const CourseTab = () => {
               </Select>
             </div>
             <div>
+<<<<<<< HEAD
               <Label className="font-bold">Course Level</Label>
+=======
+              <Label>Course Level</Label>
+>>>>>>> sprint2/main
               <Select
                 defaultValue={input.courseLevel}
                 onValueChange={selectCourseLevel}
@@ -290,7 +353,11 @@ const CourseTab = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+<<<<<<< HEAD
                     <SelectLabel className="font-bold">Course Level</SelectLabel>
+=======
+                    <SelectLabel>Course Level</SelectLabel>
+>>>>>>> sprint2/main
                     <SelectItem value="Beginner">Beginner</SelectItem>
                     <SelectItem value="Medium">Medium</SelectItem>
                     <SelectItem value="Advance">Advance</SelectItem>
@@ -299,7 +366,11 @@ const CourseTab = () => {
               </Select>
             </div>
             <div>
+<<<<<<< HEAD
               <Label className="font-bold">Price in (CAD)</Label>
+=======
+              <Label>Price in (CAD)</Label>
+>>>>>>> sprint2/main
               <Input
                 type="number"
                 name="coursePrice"
@@ -311,7 +382,11 @@ const CourseTab = () => {
             </div>
           </div>
           <div>
+<<<<<<< HEAD
             <Label className="font-bold">Course Thumbnail</Label>
+=======
+            <Label>Course Thumbnail</Label>
+>>>>>>> sprint2/main
             <Input
               type="file"
               onChange={selectThumbnail}
@@ -327,6 +402,7 @@ const CourseTab = () => {
             )}
           </div>
           <div>
+<<<<<<< HEAD
             <Button onClick={() => navigate("/admin/course")} variant="outline"
               className="border-black"
               >
@@ -336,6 +412,13 @@ const CourseTab = () => {
             <Button disabled={isLoading} onClick={updateCourseHandler}
             className="bg-blue-600 hover:bg-blue-700"
             >
+=======
+            <Button onClick={() => navigate("/admin/course")} variant="outline">
+              Cancel
+            </Button>{" "}
+            &nbsp;
+            <Button disabled={isLoading} onClick={updateCourseHandler}>
+>>>>>>> sprint2/main
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

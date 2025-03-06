@@ -179,15 +179,22 @@ const CreateLecture = () => {
             </div>
             <div className="flex justify-end gap-4 mt-4">
               <Button
+<<<<<<< HEAD
               className="border-black"
+=======
+>>>>>>> sprint2/main
                 variant="outline"
                 onClick={() => navigate(`/admin/course/${courseId}`)}
               >
                 Back to Course
               </Button>
+<<<<<<< HEAD
               <Button disabled={isLoading} onClick={createLectureHandler}
               className="bg-blue-600 hover:bg-blue-700"
               >
+=======
+              <Button disabled={isLoading} onClick={createLectureHandler}>
+>>>>>>> sprint2/main
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
