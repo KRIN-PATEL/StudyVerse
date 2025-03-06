@@ -1,7 +1,7 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
 import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
-
+// create course api
 export const createCourse = async (req, res) => {
   try {
     const { courseTitle, category } = req.body;
