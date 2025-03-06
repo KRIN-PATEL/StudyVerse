@@ -36,7 +36,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-//course table component
 const CourseTab = () => {
   const [input, setInput] = useState({
     courseTitle: "",

@@ -60,7 +60,6 @@ const appRouter = createBrowserRouter([
         path: "/reset-password",
         element: <ResetPassword />,
       },
-      //admin routing
       {
         path: "admin",
         element: <Sidebar/>,

@@ -23,7 +23,11 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+<<<<<<< HEAD
 // add course component
+=======
+
+>>>>>>> sprint2/main
 const AddCourse = () => {
   const [courseTitle, setCourseTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -37,16 +41,41 @@ const AddCourse = () => {
     setCategory(value);
   };
 
+<<<<<<< HEAD
   const createCourseHandler = async () => {
+=======
+  const validateForm = () => {
+    if (!courseTitle.trim()) {
+      toast.error(" Course title is required.", { style: { color: "red" } });
+      return false;
+    }
+    if (!category) {
+      toast.error(" Category is required.", { style: { color: "red" } });
+      return false;
+    }
+    return true;
+  };
+
+  const createCourseHandler = async (e) => {
+    e.preventDefault(); // Prevent form refresh
+    if (!validateForm()) return;
+>>>>>>> sprint2/main
     await createCourse({ courseTitle, category });
   };
 
   useEffect(() => {
     if (isSuccess) {
+<<<<<<< HEAD
       toast.success(data?.message || "Course created successfully!", {
         style: { color: "green" },
       });
       navigate("/admin/course");
+=======
+      toast.success(" Course created successfully!", { style: { color: "green" } });
+      navigate("/admin/course");
+    } else if (error) {
+      toast.error(` ${error?.data?.message || "An error occurred."}`, { style: { color: "red" } });
+>>>>>>> sprint2/main
     }
   }, [isSuccess, error]);
 
@@ -62,7 +91,11 @@ const AddCourse = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+<<<<<<< HEAD
           <form className="space-y-6">
+=======
+          <form className="space-y-6" onSubmit={createCourseHandler}>
+>>>>>>> sprint2/main
             <div className="space-y-2">
               <Label className="text-lg font-medium">Course Title</Label>
               <Input
@@ -113,8 +146,13 @@ const AddCourse = () => {
                 Back
               </Button>
               <Button
+<<<<<<< HEAD
                 disabled={isLoading}
                 onClick={createCourseHandler}
+=======
+                type="submit"
+                disabled={isLoading}
+>>>>>>> sprint2/main
                 className="w-2/5 bg-blue-600 hover:bg-blue-700 text-white"
               >
                 {isLoading ? (
@@ -134,5 +172,9 @@ const AddCourse = () => {
   );
 };
 
+<<<<<<< HEAD
 export default AddCourse;
 
+=======
+export default AddCourse;
+>>>>>>> sprint2/main
