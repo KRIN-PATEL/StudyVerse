@@ -23,7 +23,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-
+// add course component
 const AddCourse = () => {
   const [courseTitle, setCourseTitle] = useState("");
   const [category, setCategory] = useState("");
