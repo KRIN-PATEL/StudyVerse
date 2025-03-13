@@ -34,6 +34,7 @@ export const getPublishedCourse = async (_,res) => {
               message:"Course not found"
           })
       }
+      //error solved
       return res.status(200).json({
           courses,
       })
