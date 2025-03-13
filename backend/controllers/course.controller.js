@@ -25,6 +25,25 @@ export const createCourse = async (req, res) => {
     });
   }
 };
+export const getPublishedCourse = async (_,res) => {
+    try {
+        const courses = await Course.find({isPublished:true}).populate({path:"creator", select:"name photoUrl"});
+        if(!courses){
+            return res.status(404).json({
+                message:"Course not found"
+            })
+        }
+        return res.status(200).json({
+            courses,
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message:"Failed to get published courses"
+        })
+    }
+}
+
 export const getCreatorCourses = async (req, res) => {
   try {
     const userId = req.id;
@@ -66,6 +85,8 @@ export const deleteCourse = async (req, res) => {
   }
 };
 
+
+
 export const editCourse = async (req, res) => {
   try {
     const courseId = req.params.courseId;
@@ -81,17 +102,21 @@ export const editCourse = async (req, res) => {
 
     let course = await Course.findById(courseId);
     if (!course) {
-      return res.status(404).json({
-        message: "Course not found!!!!",
-      });
+      return res.status(404).json({ message: "Course not found!" });
     }
-    let courseThumbnail;
+
+    let courseThumbnail = course.courseThumbnail;
+
     if (thumbnail) {
+      // Delete old thumbnail from Cloudinary if exists
       if (course.courseThumbnail) {
-        const publicId = courseThumbnail.split("/").pop().split(".")[0];
+        const publicId = course.courseThumbnail.split("/").pop().split(".")[0];
         await deleteMediaFromCloudinary(publicId);
-        courseThumbnail = await uploadMedia(thumbnail.path);
       }
+
+      // Upload new thumbnail
+      const uploadResponse = await uploadMedia(thumbnail.path);
+      courseThumbnail = uploadResponse.secure_url;
     }
 
     const updateData = {
@@ -101,18 +126,15 @@ export const editCourse = async (req, res) => {
       category,
       courseLevel,
       coursePrice,
-      courseThumbnail: courseThumbnail?.secure_url,
+      courseThumbnail,
     };
-    course = await Course.findByIdAndUpdate(courseId, updateData, {
-      new: true,
-    });
-    return res.status(200).json({
-      message: "Course updated successfully!!!",
-    });
+
+    course = await Course.findByIdAndUpdate(courseId, updateData, { new: true });
+
+    return res.status(200).json({ course, message: "Course updated successfully!" });
   } catch (error) {
-    return res.status(500).json({
-      message: "failed to edit course!!!! ",
-    });
+    console.log(error);
+    return res.status(500).json({ message: "Failed to edit course!" });
   }
 };
 
