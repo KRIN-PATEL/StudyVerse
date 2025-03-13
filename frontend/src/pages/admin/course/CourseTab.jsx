@@ -65,28 +65,35 @@ const CourseTab = () => {
 
   useEffect(() => {
     if (courseByIdData?.course) {
-      const course = courseByIdData?.course;
+      const course = courseByIdData.course;
       setInput({
-        courseTitle: course.courseTitle,
-        subTitle: course.subTitle,
-        description: course.description,
-        category: course.category,
-        courseLevel: course.courseLevel,
-        coursePrice: course.coursePrice,
-        courseThumbnail: "",
+        courseTitle: course.courseTitle || "",
+        subTitle: course.subTitle || "",
+        description: course.description || "",
+        category: course.category || "",
+        courseLevel: course.courseLevel || "",
+        coursePrice: course.coursePrice || "",
+        courseThumbnail: course.courseThumbnail || "",
       });
-
+  
+      // If there's a course thumbnail in DB, set it for preview
+      if (course.courseThumbnail) {
+        setPreviewThumbnail(course.courseThumbnail);
+      }
+  
+      // Ensure publish button is enabled only if all required fields are present
       setCoursePublish(
         course.courseTitle &&
-          course.subTitle &&
-          course.description &&
-          course.category &&
-          course.courseLevel &&
-          course.coursePrice &&
-          course.lectures.length > 0 
+        course.subTitle &&
+        course.description &&
+        course.category &&
+        course.courseLevel &&
+        course.coursePrice &&
+        course.lectures?.length > 0
       );
     }
   }, [courseByIdData]);
+  
 
   const deleteCourseHandler = async () => {
     try {
@@ -250,7 +257,8 @@ const CourseTab = () => {
             <div>
               <Label className="font-bold">Category</Label>
               <Select
-                defaultValue={input.category}
+                // defaultValue={input.category}
+                value={input.category}
                 onValueChange={selectCategory}
               >
                 <SelectTrigger className="w-[180px]">
@@ -282,7 +290,8 @@ const CourseTab = () => {
             <div>
               <Label className="font-bold">Course Level</Label>
               <Select
-                defaultValue={input.courseLevel}
+                // defaultValue={input.courseLevel}
+                value={input.courseLevel}
                 onValueChange={selectCourseLevel}
               >
                 <SelectTrigger className="w-[180px]">
