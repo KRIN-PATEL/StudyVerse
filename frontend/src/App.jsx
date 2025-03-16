@@ -18,6 +18,7 @@ import EditCourse from "./pages/admin/course/EditCourse";
 import CreateLecture from "./pages/admin/lecture/CreateLecture";
 import EditLecture from "./pages/admin/lecture/EditLecture";
 import CourseDetail from "./pages/client/CourseDetail";
+import CourseProgress from "./pages/client/CourseProgress";
 
 const appRouter = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const appRouter = createBrowserRouter([
         element: <CourseDetail />,
       },
       {
+        path: "/course-progress/:courseId",
+        element: <CourseProgress />,
+      },
+      {
         path: "/forgot-password",
         element: <ForgotPassword />,
       },
@@ -65,7 +70,7 @@ const appRouter = createBrowserRouter([
         path: "/reset-password",
         element: <ResetPassword />,
       },
-      //admin routing
+      //admin route
       {
         path: "admin",
         element: <Sidebar/>,

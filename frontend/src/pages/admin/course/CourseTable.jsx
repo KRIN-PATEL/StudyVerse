@@ -42,12 +42,10 @@ const CourseTable = () => {
     );
 
   return (
-    <div className="mt-10 bg-white dark:bg-black shadow-lg rounded-lg p-6">
+    <div className="mt-10 bg-white shadow-lg rounded-lg p-6">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-          Existing Courses
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-800">Exisitng Courses</h2>
         <Button
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={createCourseHandler}
@@ -59,33 +57,29 @@ const CourseTable = () => {
 
       {/* Course Table */}
       <div className="overflow-x-auto">
-        <Table className="min-w-full border border-gray-200 dark:border-gray-700 rounded-lg">
-          <TableCaption className="text-gray-600 dark:text-gray-300 font-semibold">
+        <Table className="min-w-full border border-gray-200 rounded-lg">
+          <TableCaption className="text-gray-600 font-semibold">
             A list of your recent courses
           </TableCaption>
-          <TableHeader className="bg-gray-100 dark:bg-black">
+          <TableHeader className="bg-gray-100">
             <TableRow>
-              <TableHead className="w-[100px] font-bold text-gray-800 dark:text-white">
+              <TableHead className="w-[100px] font-bold text-gray-800">
                 Price
               </TableHead>
-              <TableHead className="font-bold text-gray-800 dark:text-white">
-                Status
-              </TableHead>
-              <TableHead className="font-bold text-gray-800 dark:text-white">
-                Title
-              </TableHead>
-              <TableHead className="text-right font-bold text-gray-800 dark:text-white">
+              <TableHead className="font-bold text-gray-800">Status</TableHead>
+              <TableHead className="font-bold text-gray-800">Title</TableHead>
+              <TableHead className="text-right font-bold text-gray-800">
                 Action
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.courses?.map((course) => (
+            {data.courses.map((course) => (
               <TableRow
                 key={course._id}
-                className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+                className="hover:bg-gray-50 transition-all"
               >
-                <TableCell className="font-medium text-gray-700 dark:text-white">
+                <TableCell className="font-medium text-gray-700">
                   {course?.coursePrice ? `$${course.coursePrice}` : "NA"}
                 </TableCell>
 
@@ -98,14 +92,14 @@ const CourseTable = () => {
                     {course.isPublished ? "Published" : "Draft"}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-gray-700 dark:text-white">
+                <TableCell className="text-gray-700">
                   {course.courseTitle}
                 </TableCell>
                 <TableCell className="text-right">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-gray-400 dark:border-gray-600 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-900"
+                    className="border-gray-400 text-gray-700 hover:bg-gray-200"
                     onClick={() => navigate(`${course._id}`)}
                   >
                     <Edit size={18} />

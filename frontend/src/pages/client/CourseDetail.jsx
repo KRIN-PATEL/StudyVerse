@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
-import BuyCourseButton from "@/components/ui/buyCourseButton";
+import BuyCourseButton from "@/components/ui/BuyCourseButton";
 import { CardDescription, CardHeader, Card, CardTitle, CardContent, CardFooter} from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-separator";
 import { BadgeInfo, PlayCircle, Lock} from "lucide-react";
 
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const CourseDetail = () => {
-  const purchasedCourse = true;
+  const params = useParams();
+  const courseId= params.courseId;
+  const purchasedCourse = false;
   return (
     <div className="mt-20 space-y-5">
       <div className="bg-[#2D2F31] text-white">
@@ -67,10 +70,10 @@ const CourseDetail = () => {
               <CardFooter>
                 {
                   purchasedCourse ? (
-                    <Button className="w-full">Contimue  Course</Button>
+                    <Button className="w-full">Purchase Course</Button>
                   ) :
                   (
-                    <BuyCourseButton/>
+                    <BuyCourseButton courseId={courseId}/>
                   )
                 }
                
