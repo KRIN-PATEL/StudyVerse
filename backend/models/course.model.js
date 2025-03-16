@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 
-// course schema
 const courseSchema = new mongoose.Schema({
     courseTitle:{
         type:String,

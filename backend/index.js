@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./database/dbConnect.js";
 import userRoute from "./routes/user.routes.js";
 import courseRoute from "./routes/course.routes.js";
+import purchaseRoute from "./routes/purchaseCourse.route.js"
 import cors from "cors";
 import mediaRoute from "./routes/media.route.js";
 import { createCourse } from "./controllers/course.controller.js";
@@ -28,6 +29,7 @@ app.use(
 app.use("/api/v1/media", mediaRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
+app.use("/api/v1/purchase", purchaseRoute);
 
 app.get("home", (_, res) => {
   res.status(200).json({

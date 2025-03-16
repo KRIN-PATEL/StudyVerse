@@ -5,9 +5,9 @@ import upload from "../utils/multer.js";
 
 import { createCourse, createLecture, deleteCourse, editCourse, editLecture, getCourseById, getCourseLecture, getCreatorCourses, getLectureById, getPublishedCourse, removeLecture, togglePublishCourse } from "../controllers/course.controller.js";
 const router = express.Router();
-// course routing
-router.route("/").post(isAuthenticated, createCourse);
 router.route("/published-courses").get( getPublishedCourse);
+router.route("/").post(isAuthenticated, createCourse);
+//router.route("/published-courses").get( getPublishedCourse);
 router.route("/").get(isAuthenticated, getCreatorCourses);
 router.route("/:courseId").put(isAuthenticated,upload.single("courseThumbnail"), editCourse);
 router.route("/:courseId").get(isAuthenticated, getCourseById);
