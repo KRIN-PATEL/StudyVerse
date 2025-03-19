@@ -9,6 +9,7 @@ import cors from "cors";
 import mediaRoute from "./routes/media.route.js";
 import { createCourse } from "./controllers/course.controller.js";
 dotenv.config({});
+import  CourseProgressRoute  from "./routes/courseProgress.route.js";
 
 connectDB();
 
@@ -30,6 +31,7 @@ app.use("/api/v1/media", mediaRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/purchase", purchaseRoute);
+app.use("/api/v1/courseProgress", CourseProgressRoute);
 
 app.get("home", (_, res) => {
   res.status(200).json({
