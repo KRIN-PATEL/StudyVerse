@@ -20,6 +20,7 @@ const DarkMode = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // dark theme
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
