@@ -98,7 +98,7 @@ const Dashboard = () => {
       </Card>
 
       {/* Course Category Distribution */}
-      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
+      {/* <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Course Category Distribution
@@ -120,9 +120,9 @@ const Dashboard = () => {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-          
+           */}
           {/* Legend Displayed Below */}
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
+          {/* <div className="flex flex-wrap justify-center gap-3 mt-4">
             {courseCategoryData.map((entry, index) => (
               <div key={index} className="flex items-center gap-2">
                 <span
@@ -134,10 +134,10 @@ const Dashboard = () => {
             ))}
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Monthly Active Users */}
-      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
+      {/* <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
             Total Active Users
@@ -153,7 +153,7 @@ const Dashboard = () => {
             </AreaChart>
           </ResponsiveContainer>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 };
