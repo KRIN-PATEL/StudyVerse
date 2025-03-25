@@ -75,6 +75,7 @@ const appRouter = createBrowserRouter([
         path: "/reset-password",
         element: <ResetPassword />,
       },
+      
       //admin route
       {
         path: "admin",
