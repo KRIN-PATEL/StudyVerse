@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
 import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
@@ -86,7 +87,7 @@ export const logout = async (_, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const userId = req.id;
-    const user = await User.findById(userId).select("-password");
+    const user = await User.findById(userId).select("-password").populate("enrolledCourses");
     if (!user) {
       return res.status(404).json({
         message: "Profile not found",
@@ -105,6 +106,28 @@ export const getUserProfile = async (req, res) => {
     });
   }
 };
+// export const getUserProfile = async (req, res) => {
+//   try {
+//     const userId = req.id;
+//     const user = await User.findById(userId).select("-password").populate("enrolledCourses");
+//     if (!user) {
+//       return res.status(404).json({
+//         message: "Profile not found",
+//         success: false,
+//       });
+//     }
+//     return res.status(200).json({
+//       success: true,
+//       user,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to load user",
+//     });
+//   }
+// };
 // export const updateProfile = async (req, res) => {
 //   try {
 //     const userId = req.id;
@@ -303,3 +326,64 @@ export const resetPassword = async (req, res) => {
       .json({ success: false, message: "Failed to reset password." });
   }
 };
+
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password").populate("enrolledCourses");
+    return res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};
+// export const getUsers = async (req, res) => {
+//   try {
+//     const users = await User.find().select("-password");
+//     return res.status(200).json({
+//       success: true,
+//       users,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to fetch users",
+//     });
+//   }
+// };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params; // Get userId from the request params
+
+    // Find and delete the user
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to delete user",
+    });
+  }
+};
+
+
