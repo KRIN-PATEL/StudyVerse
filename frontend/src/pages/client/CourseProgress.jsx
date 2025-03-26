@@ -27,7 +27,7 @@ const CourseProgress = () => {
     inCompleteCourse,
     { data: markInCompleteData, isSuccess: inCompletedSuccess },
   ] = useInCompleteCourseMutation();
-
+// use effect for real time update
   useEffect(() => {
     console.log(markCompleteData);
 
