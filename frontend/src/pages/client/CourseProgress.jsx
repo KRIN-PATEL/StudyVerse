@@ -58,7 +58,7 @@ const CourseProgress = () => {
   const isLectureCompleted = (lectureId) => {
     return progress.some((prog) => prog.lectureId === lectureId && prog.viewed);
   };
-
+// added lecture progress function
   const handleLectureProgress = async (lectureId) => {
     await updateLectureProgress({ courseId, lectureId });
     refetch();
