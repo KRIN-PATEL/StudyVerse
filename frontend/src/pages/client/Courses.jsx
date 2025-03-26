@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 import Course from "./Course";
 import { useGetPublishedCourseQuery } from "@/features/api/courseApi";
- 
+ // updated code by harsh
 const Courses = () => {
   const {data, isLoading, isError} = useGetPublishedCourseQuery();
  
