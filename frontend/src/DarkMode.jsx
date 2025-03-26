@@ -10,7 +10,7 @@ import { Moon, Sun } from "lucide-react";
 
 const DarkMode = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
+//updated code 
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
