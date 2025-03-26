@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// url of backend 
 const COURSE_PROGRESS_API = "http://localhost:1552/api/v1/courseProgress";
 
 export const courseProgressApi = createApi({
