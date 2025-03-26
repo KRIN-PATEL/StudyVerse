@@ -19,6 +19,12 @@ import CreateLecture from "./pages/admin/lecture/CreateLecture";
 import EditLecture from "./pages/admin/lecture/EditLecture";
 import CourseDetail from "./pages/client/CourseDetail";
 import CourseProgress from "./pages/client/CourseProgress";
+import SearchPage from "./pages/client/SearchPage";
+import ReviewTable from "./pages/admin/ReviewTable";
+import Users from "./pages/admin/Users";
+import UserDetailPage from "./pages/admin/UserDetailPage";
+import ManageCourses from "./pages/admin/ManageCourses";
+
 
 const appRouter = createBrowserRouter([
   {
@@ -51,6 +57,10 @@ const appRouter = createBrowserRouter([
         element: <Profile />,
       },
       {
+        path: "course/search",
+        element: <SearchPage />,
+      },
+      {
         path: "/course-detail/:courseId",
         element: <CourseDetail />,
       },
@@ -80,6 +90,10 @@ const appRouter = createBrowserRouter([
             element: <Dashboard />,
           },
           {
+            path: "manage-courses",  // New route
+            element: <ManageCourses />,
+          },
+          {
             path: "course",
             element: <CourseTable />,
           },
@@ -99,30 +113,20 @@ const appRouter = createBrowserRouter([
             path: "course/:courseId/lecture/:lectureId",
             element: <EditLecture />,
           },
-          // {
-          //   path: "dashboard",
-          //   element: <Dashboard />,
-          // },
-          // {
-          //   path: "course",
-          //   element: <CourseTable />,
-          // },
-          // {
-          //   path: "course/create",
-          //   element: <AddCourse />,
-          // },
-          // {
-          //   path: "course/:courseId",
-          //   element: <EditCourse />,
-          // },
-          // {
-          //   path: "course/:courseId/lecture",
-          //   element: <CreateLecture />,
-          // },
-          // {
-          //   path: "course/:courseId/lecture/:lectureId",
-          //   element: <EditLecture />,
-          // }
+          {
+            path: "course-reviews",
+            element: <ReviewTable />,
+          },
+          {
+            path: "users",
+            element: <Users />, // Add Users route
+          },
+          {
+            path: "user/:userId", // Fixed relative path
+            element: <UserDetailPage />, // Add Users route
+          },
+
+          
         ],
       },
     ],
