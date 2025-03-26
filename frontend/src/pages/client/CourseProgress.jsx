@@ -95,7 +95,7 @@ const CourseProgress = () => {
           )}
         </Button>
       </div>
-
+{/* // added btn for mark as completed */}
       <div className="flex flex-col md:flex-row gap-6">
         {/* Video section  */}
         <div className="flex-1 md:w-3/5 h-fit rounded-lg shadow-lg p-4">
