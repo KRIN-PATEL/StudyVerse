@@ -123,6 +123,7 @@ const CourseProgress = () => {
             </h3>
           </div>
         </div>
+      
         {/* Lecture Sidebar  */}
         <div className="flex flex-col w-full md:w-2/5 border-t md:border-t-0 md:border-l border-gray-200 md:pl-4 pt-4 md:pt-0">
           <h2 className="font-semibold text-xl mb-4">Course Lecture</h2>
@@ -169,5 +170,5 @@ const CourseProgress = () => {
 };
 
 export default CourseProgress;
-
+// solved error of leture not loading 
 // added progress 
