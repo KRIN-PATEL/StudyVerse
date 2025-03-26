@@ -27,7 +27,7 @@ const Courses = () => {
 };
 
 export default Courses;
-
+// solved bug
 const CourseSkeleton = () => {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow rounded-lg overflow-hidden">
