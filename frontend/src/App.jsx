@@ -20,7 +20,7 @@ import EditLecture from "./pages/admin/lecture/EditLecture";
 import CourseDetail from "./pages/client/CourseDetail";
 import CourseProgress from "./pages/client/CourseProgress";
 import SearchPage from "./pages/client/SearchPage";
-
+// updated routes by harsh
 const appRouter = createBrowserRouter([
   {
     path: "/",
