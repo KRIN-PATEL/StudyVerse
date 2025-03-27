@@ -20,10 +20,13 @@ import EditLecture from "./pages/admin/lecture/EditLecture";
 import CourseDetail from "./pages/client/CourseDetail";
 import CourseProgress from "./pages/client/CourseProgress";
 import SearchPage from "./pages/client/SearchPage";
+<<<<<<< HEAD
 import ReviewTable from "./pages/admin/ReviewTable";
 import Users from "./pages/admin/Users";
 import UserDetailPage from "./pages/admin/UserDetailPage";
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
 const appRouter = createBrowserRouter([
   {
@@ -79,6 +82,10 @@ const appRouter = createBrowserRouter([
         path: "/reset-password",
         element: <ResetPassword />,
       },
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
       //admin route
       {
         path: "admin",
@@ -108,6 +115,7 @@ const appRouter = createBrowserRouter([
             path: "course/:courseId/lecture/:lectureId",
             element: <EditLecture />,
           },
+<<<<<<< HEAD
           {
             path: "course-reviews",
             element: <ReviewTable />,
@@ -122,6 +130,32 @@ const appRouter = createBrowserRouter([
           },
 
           
+=======
+          // {
+          //   path: "dashboard",
+          //   element: <Dashboard />,
+          // },
+          // {
+          //   path: "course",
+          //   element: <CourseTable />,
+          // },
+          // {
+          //   path: "course/create",
+          //   element: <AddCourse />,
+          // },
+          // {
+          //   path: "course/:courseId",
+          //   element: <EditCourse />,
+          // },
+          // {
+          //   path: "course/:courseId/lecture",
+          //   element: <CreateLecture />,
+          // },
+          // {
+          //   path: "course/:courseId/lecture/:lectureId",
+          //   element: <EditLecture />,
+          // }
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         ],
       },
     ],

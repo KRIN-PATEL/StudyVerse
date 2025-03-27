@@ -16,6 +16,7 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch_Creator_Course"],
     }),
+<<<<<<< HEAD
     getSearchCourse: builder.query({
       query: ({ searchQuery, categories, sortByPrice, page, limit }) => {
         const params = new URLSearchParams();
@@ -37,6 +38,30 @@ export const courseApi = createApi({
       },
     }),
 
+=======
+    getSearchCourse:builder.query({
+      query: ({searchQuery, categories, sortByPrice}) => {
+        // Build qiery string
+        let queryString = `/search?query=${encodeURIComponent(searchQuery)}`
+
+        // append cateogry 
+        if(categories && categories.length > 0) {
+          const categoriesString = categories.map(encodeURIComponent).join(",");
+          queryString += `&categories=${categoriesString}`; 
+        }
+
+        // Append sortByPrice is available
+        if(sortByPrice){
+          queryString += `&sortByPrice=${encodeURIComponent(sortByPrice)}`; 
+        }
+
+        return {
+          url:queryString,
+          method:"GET", 
+        }
+      }
+    }),
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     getPublishedCourse: builder.query({
       query: () => ({
         url: "/published-courses",
@@ -104,6 +129,7 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+<<<<<<< HEAD
     rateCourse: builder.mutation({
       query: ({ courseId, rating }) => ({
         url: `/${courseId}/rate`,
@@ -117,6 +143,8 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
     publishCourse: builder.mutation({
       query: ({ courseId, query }) => ({
@@ -148,6 +176,9 @@ export const {
   usePublishCourseMutation,
   useDeleteCourseMutation,
   useGetPublishedCourseQuery,
+<<<<<<< HEAD
   useRateCourseMutation,
   useGetAllCourseReviewsQuery,
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 } = courseApi;

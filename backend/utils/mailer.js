@@ -1,8 +1,11 @@
 import nodemailer from "nodemailer";
 import path from "path";
 import { fileURLToPath } from "url";
+<<<<<<< HEAD
 import { renderToBuffer } from "@react-pdf/renderer";
 import { InvoiceDocument } from "./invoiceTemplate.js";
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,6 +56,7 @@ export const sendEmail = async (to, name, otp) => {
     console.error("Failed to send OTP email:", error);
   }
 };
+<<<<<<< HEAD
 
 
 // export const sendInvoiceEmail = async (email, name, courseTitle, amount) => {
@@ -234,3 +238,5 @@ export const sendInvoiceEmail = async (to, name, courseTitle, amount, paymentId)
     console.error("Failed to send invoice email:", error);
   }
 };
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1

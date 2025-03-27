@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //course purchase model 
+=======
+
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 import mongoose from "mongoose";
 const coursePurchaseSchema = new mongoose.Schema({
     courseId:{

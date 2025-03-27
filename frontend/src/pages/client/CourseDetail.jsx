@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import BuyCourseButton from "@/components/ui/BuyCourseButton";
+<<<<<<< HEAD
 import StarRating from "@/components/ui/StarRating";
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 import {
   Card,
   CardContent,
@@ -31,10 +34,17 @@ const CourseDetail = () => {
   console.log(purchased);
 
   const handleContinueCourse = () => {
+<<<<<<< HEAD
     if (purchased) {
       navigate(`/course-progress/${courseId}`);
     }
   };
+=======
+    if(purchased){
+      navigate(`/course-progress/${courseId}`)
+    }
+  }
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
   return (
     <div className="mt-20 space-y-5">
@@ -43,16 +53,21 @@ const CourseDetail = () => {
           <h1 className="font-bold text-2xl md:text-3xl">
             {course?.courseTitle}
           </h1>
+<<<<<<< HEAD
           <p
             className="text-base md:text-lg"
             dangerouslySetInnerHTML={{ __html: course.subTitle }}
           />
+=======
+          <p className="text-base md:text-lg"  dangerouslySetInnerHTML={{ __html: course.subTitle }}/>
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
           <p>
             Created By{" "}
             <span className="text-[#C0C4FC] underline italic">
               {course?.creator.name}
             </span>
           </p>
+<<<<<<< HEAD
           {course.averageRating && (
             <p className="text-sm flex items-center gap-1">
               <span className="text-yellow-400">★</span>
@@ -61,6 +76,8 @@ const CourseDetail = () => {
             </p>
           )}
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
           <div className="flex items-center gap-2 text-sm">
             <BadgeInfo size={16} />
             <p>Last updated {course?.createdAt.split("T")[0]}</p>
@@ -107,6 +124,7 @@ const CourseDetail = () => {
               <Separator className="my-2" />
               <h1 className="text-lg md:text-xl font-semibold">Course Price</h1>
             </CardContent>
+<<<<<<< HEAD
             <CardFooter className="flex flex-col gap-4 justify-center p-4">
               {purchased ? (
                 <>
@@ -128,6 +146,11 @@ const CourseDetail = () => {
                     </div>
                   )}
                 </>
+=======
+            <CardFooter className="flex justify-center p-4">
+              {purchased ? (
+                <Button onClick={handleContinueCourse} className="w-full">Continue Course</Button>
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
               ) : (
                 <BuyCourseButton courseId={courseId} />
               )}

@@ -1,5 +1,8 @@
 import { User } from "../models/user.model.js";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
 import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
@@ -87,7 +90,11 @@ export const logout = async (_, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const userId = req.id;
+<<<<<<< HEAD
     const user = await User.findById(userId).select("-password").populate("enrolledCourses");
+=======
+    const user = await User.findById(userId).select("-password");
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     if (!user) {
       return res.status(404).json({
         message: "Profile not found",
@@ -106,6 +113,7 @@ export const getUserProfile = async (req, res) => {
     });
   }
 };
+<<<<<<< HEAD
 // export const getUserProfile = async (req, res) => {
 //   try {
 //     const userId = req.id;
@@ -128,6 +136,8 @@ export const getUserProfile = async (req, res) => {
 //     });
 //   }
 // };
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 // export const updateProfile = async (req, res) => {
 //   try {
 //     const userId = req.id;
@@ -326,6 +336,7 @@ export const resetPassword = async (req, res) => {
       .json({ success: false, message: "Failed to reset password." });
   }
 };
+<<<<<<< HEAD
 
 
 export const getUsers = async (req, res) => {
@@ -387,3 +398,5 @@ export const deleteUser = async (req, res) => {
 };
 
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1

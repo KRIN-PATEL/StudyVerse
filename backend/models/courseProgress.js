@@ -1,5 +1,9 @@
 import mongoose from "mongoose"
 
+<<<<<<< HEAD
+=======
+// course progress model
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 const lectureProgressSchema = new mongoose.Schema({
     lectureId:{type:String},
     viewed:{type:Boolean}

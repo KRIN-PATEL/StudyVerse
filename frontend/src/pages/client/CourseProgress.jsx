@@ -193,3 +193,8 @@ const CourseProgress = () => {
 };
 
 export default CourseProgress;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1

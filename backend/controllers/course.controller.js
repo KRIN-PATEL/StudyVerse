@@ -1,7 +1,10 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
+<<<<<<< HEAD
 import { CoursePurchase } from "../models/coursePurchase.model.js";
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 
 export const createCourse = async (req, res) => {
@@ -27,6 +30,7 @@ export const createCourse = async (req, res) => {
     });
   }
 };
+<<<<<<< HEAD
 
 export const searchCourse = async (req, res) => {
   try {
@@ -84,6 +88,8 @@ export const searchCourse = async (req, res) => {
 
 
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 export const getPublishedCourse = async (_,res) => {
   try {
       const courses = await Course.find({isPublished:true}).populate({path:"creator", select:"name photoUrl"});
@@ -102,6 +108,7 @@ export const getPublishedCourse = async (_,res) => {
       })
   }
 }
+<<<<<<< HEAD
 export const rateCourse = async (req, res) => {
   try {
     const { courseId } = req.params;
@@ -158,6 +165,9 @@ export const getAllCourseReviews = async (req, res) => {
     return res.status(500).json({ message: "Failed to get course reviews" });
   }
 };
+=======
+
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 export const getCreatorCourses = async (req, res) => {
   try {
     const userId = req.id;

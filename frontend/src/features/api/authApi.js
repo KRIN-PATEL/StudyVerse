@@ -91,6 +91,7 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+<<<<<<< HEAD
     getUsers: builder.query({
       query: () => ({
         url: "users",
@@ -103,6 +104,8 @@ export const authApi = createApi({
         method: "DELETE",
       }),
     }),
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
   }),
 });
 export const {
@@ -114,6 +117,9 @@ export const {
   useForgotPasswordMutation,
   useVerifyOTPMutation,
   useResetPasswordMutation,
+<<<<<<< HEAD
   useGetUsersQuery,
   useDeleteUserMutation,
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 } = authApi;

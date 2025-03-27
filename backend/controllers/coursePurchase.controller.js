@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import Stripe from "stripe";
 // import { Course } from "../models/course.model";
 // import { CoursePurchase } from "../models/coursePurchase.model";
@@ -62,13 +63,18 @@
 // };
 
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
 import Stripe from "stripe";
 import { Course } from "../models/course.model.js";
 import { CoursePurchase } from "../models/coursePurchase.model.js";
 import { Lecture } from "../models/lecture.model.js";
 import { User } from "../models/user.model.js";
+<<<<<<< HEAD
 import { sendInvoiceEmail } from "../utils/mailer.js"; // update the path if your file is elsewhere
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -183,6 +189,7 @@ export const stripeWebhook = async (req, res) => {
 
       await purchase.save();
 
+<<<<<<< HEAD
 // Update user's enrolledCourses
 await User.findByIdAndUpdate(
   purchase.userId,
@@ -217,6 +224,21 @@ if (user && user.email && purchase.courseId) {
   );
 }
 
+=======
+      // Update user's enrolledCourses
+      await User.findByIdAndUpdate(
+        purchase.userId,
+        { $addToSet: { enrolledCourses: purchase.courseId._id } }, // Add course ID to enrolledCourses
+        { new: true }
+      );
+
+      // Update course to add user ID to enrolledStudents
+      await Course.findByIdAndUpdate(
+        purchase.courseId._id,
+        { $addToSet: { enrolledStudents: purchase.userId } }, // Add user ID to enrolledStudents
+        { new: true }
+      );
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     } catch (error) {
       console.error("Error handling event:", error);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -224,6 +246,7 @@ if (user && user.email && purchase.courseId) {
   }
   res.status(200).send();
 };
+<<<<<<< HEAD
 // export const getCourseDetailWithPurchaseStatus = async (req, res) => {
 //   try {
 //     const { courseId } = req.params;
@@ -248,6 +271,8 @@ if (user && user.email && purchase.courseId) {
 //     console.log(error);
 //   }
 // };
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 export const getCourseDetailWithPurchaseStatus = async (req, res) => {
   try {
     const { courseId } = req.params;
@@ -257,10 +282,17 @@ export const getCourseDetailWithPurchaseStatus = async (req, res) => {
       .populate({ path: "creator" })
       .populate({ path: "lectures" });
 
+<<<<<<< HEAD
+=======
+    const purchased = await CoursePurchase.findOne({ userId, courseId });
+    console.log(purchased);
+
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     if (!course) {
       return res.status(404).json({ message: "course not found!" });
     }
 
+<<<<<<< HEAD
     const purchased = await CoursePurchase.findOne({ userId, courseId });
 
     // Check if user already rated the course
@@ -280,6 +312,14 @@ export const getCourseDetailWithPurchaseStatus = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Failed to get course details" });
+=======
+    return res.status(200).json({
+      course,
+      purchased: !!purchased, // true if purchased, false otherwise
+    });
+  } catch (error) {
+    console.log(error);
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
   }
 };
 
@@ -300,6 +340,7 @@ export const getAllPurchasedCourse = async (_, res) => {
     console.log(error);
   }
 };
+<<<<<<< HEAD
 export const getDashboardStats = async (req, res) => {
   try {
     const currentYear = new Date().getFullYear();
@@ -398,3 +439,5 @@ export const getDashboardStats = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch dashboard stats" });
   }
 };
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1

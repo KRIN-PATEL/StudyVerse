@@ -30,6 +30,7 @@
 
 
 
+<<<<<<< HEAD
 // import { ChartNoAxesColumn, SquareLibrary, Users } from "lucide-react";
 // import React from "react";
 // import { Link, Outlet } from "react-router-dom";
@@ -144,6 +145,8 @@
 
 
 // src/components/Sidebar.js
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 import { ChartNoAxesColumn, SquareLibrary, Users } from "lucide-react";
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
@@ -161,6 +164,12 @@ const Sidebar = () => {
             alt="StudyVerse Logo"
             className="h-100 w-100 object-contain"
           />
+<<<<<<< HEAD
+=======
+          {/* <h1 className="text-xl font-bold mt-2 text-gray-800 dark:text-white">
+            StudyVerse
+          </h1> */}
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         </div>
 
         {/* Navigation Links */}
@@ -179,6 +188,7 @@ const Sidebar = () => {
             <SquareLibrary size={24} />
             <h1 className="text-lg">Courses</h1>
           </Link>
+<<<<<<< HEAD
           <Link
             to="course-reviews"
             className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
@@ -193,6 +203,8 @@ const Sidebar = () => {
             <Users size={24} />
             <h1 className="text-lg">Users</h1>
           </Link>
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         </div>
       </div>
 

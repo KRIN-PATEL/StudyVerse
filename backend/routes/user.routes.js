@@ -1,8 +1,12 @@
 import express from "express";
 import {
+<<<<<<< HEAD
   deleteUser,
   getUserProfile,
   getUsers,
+=======
+  getUserProfile,
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
   login,
   logout,
   register,
@@ -27,8 +31,11 @@ router
 router.route("/forgot-password").post(forgotPassword);
 router.route("/verify-otp").post(verifyOTP);
 router.route("/reset-password").post(resetPassword);
+<<<<<<< HEAD
 router.route("/users").get(getUsers); 
 router.route("/users/:userId").delete(deleteUser); 
 
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
 export default router;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   BarChart,
   Bar,
@@ -24,10 +25,53 @@ import {
 
 import { useGetDashboardStatsQuery, useGetPurchasedCoursesQuery } from "@/features/api/purchaseApi";
 import React from "react";
+=======
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  LineChart, Line, AreaChart, Area, PieChart, Pie, Cell
+} from "recharts";
+
+// Static Data for Charts
+const courseEnrollmentData = [
+  { month: "Jan", enrollments: 30 },
+  { month: "Feb", enrollments: 50 },
+  { month: "Mar", enrollments: 35 },
+  { month: "Apr", enrollments: 50 },
+  { month: "May", enrollments: 70 },
+];
+
+const revenueData = [
+  { month: "Jan", revenue: 200 },
+  { month: "Feb", revenue: 300 },
+  { month: "Mar", revenue: 250 },
+  { month: "Apr", revenue: 200 },
+  { month: "May", revenue: 300 },
+];
+
+const courseCategoryData = [
+  { category: "Full Stack Development", value: 10 },
+  { category: "Mern Stack Development", value: 10 },
+  { category: "Frontend Development", value: 18 },
+  { category: "Data Science", value: 10 },
+  { category: "Python", value: 10 },
+  { category: "Docker", value: 15 },
+];
+
+const monthlyActiveUsersData = [
+  { month: "Jan", users: 50 },
+  { month: "Feb", users: 70 },
+  { month: "Mar", users: 50 },
+  { month: "Apr", users: 70 },
+  { month: "May", users: 90 },
+];
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF6384", "#36A2EB"];
 
 const Dashboard = () => {
+<<<<<<< HEAD
   const { data: statsData, isLoading, isError } = useGetDashboardStatsQuery();
   const { data: purchaseData, isLoading: isPurchaseLoading } = useGetPurchasedCoursesQuery();
 
@@ -56,6 +100,13 @@ const Dashboard = () => {
     
       {/* 📌 Dashboard Overview */}
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full bg-white dark:bg-gray-900">
+=======
+  return (
+    <div className="grid gap-6 grid-cols-1 mt-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      
+      {/* Dashboard Overview */}
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 bg-white dark:bg-gray-900">
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         <CardHeader>
           <CardTitle className="text-xl font-bold text-black-700 dark:text-gray-300">
             Dashboard Overview
@@ -67,6 +118,7 @@ const Dashboard = () => {
           </p>
         </CardContent>
       </Card>
+<<<<<<< HEAD
  {/* 💡 Summary Cards: Total Sales & Revenue */}
 <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
   <CardHeader>
@@ -128,6 +180,11 @@ const Dashboard = () => {
 
       {/* 📊 Course Enrollment Statistics */}
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
+=======
+
+      {/* Course Enrollment Statistics */}
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-2 bg-white dark:bg-gray-900">
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         <CardHeader>
           <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
             Total Students Enrolled
@@ -145,8 +202,13 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
+<<<<<<< HEAD
       {/* 💰 Revenue Trends */}
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
+=======
+      {/* Revenue Trends */}
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Revenue Trends
@@ -155,7 +217,10 @@ const Dashboard = () => {
         <CardContent>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={revenueData}>
+<<<<<<< HEAD
               <CartesianGrid strokeDasharray="3 3" />
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
               <XAxis dataKey="month" stroke="#8884d8" />
               <YAxis />
               <Tooltip />
@@ -165,8 +230,13 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
+<<<<<<< HEAD
       {/* 📚 Course Category Distribution */}
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
+=======
+      {/* Course Category Distribution */}
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Course Category Distribution
@@ -175,6 +245,7 @@ const Dashboard = () => {
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
+<<<<<<< HEAD
               <Pie
                 data={courseCategoryData}
                 dataKey="value"
@@ -182,6 +253,13 @@ const Dashboard = () => {
                 cx="50%"
                 cy="50%"
                 outerRadius={90}
+=======
+              <Pie 
+                data={courseCategoryData} 
+                dataKey="value" 
+                cx="50%" cy="50%" 
+                outerRadius={90} 
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
               >
                 {courseCategoryData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -190,8 +268,13 @@ const Dashboard = () => {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
+<<<<<<< HEAD
 
           {/* Legend */}
+=======
+          
+          {/* Legend Displayed Below */}
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
           <div className="flex flex-wrap justify-center gap-3 mt-4">
             {courseCategoryData.map((entry, index) => (
               <div key={index} className="flex items-center gap-2">
@@ -199,17 +282,26 @@ const Dashboard = () => {
                   className="w-4 h-4 rounded-full"
                   style={{ backgroundColor: COLORS[index % COLORS.length] }}
                 ></span>
+<<<<<<< HEAD
                 <span className="text-gray-700 dark:text-gray-300">
                   {entry.category}
                 </span>
+=======
+                <span className="text-gray-700 dark:text-gray-300">{entry.category}</span>
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
               </div>
             ))}
           </div>
         </CardContent>
       </Card>
 
+<<<<<<< HEAD
       {/* 👥 Monthly Active Users */}
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
+=======
+      {/* Monthly Active Users */}
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-1 sm:col-span-2 bg-white dark:bg-gray-900">
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
         <CardHeader>
           <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
             Total Active Users
@@ -221,18 +313,25 @@ const Dashboard = () => {
               <XAxis dataKey="month" stroke="#8884d8" />
               <YAxis />
               <Tooltip />
+<<<<<<< HEAD
               <Area
                 type="monotone"
                 dataKey="users"
                 stroke="#00C49F"
                 fill="#00C49F"
               />
+=======
+              <Area type="monotone" dataKey="users" stroke="#00C49F" fill="#00C49F" />
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
             </AreaChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
+<<<<<<< HEAD
 
      
+=======
+>>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     </div>
   );
 };
