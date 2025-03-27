@@ -1,6 +1,8 @@
 import express from "express";
 import {
+  deleteUser,
   getUserProfile,
+  getUsers,
   login,
   logout,
   register,
@@ -25,5 +27,8 @@ router
 router.route("/forgot-password").post(forgotPassword);
 router.route("/verify-otp").post(verifyOTP);
 router.route("/reset-password").post(resetPassword);
+router.route("/users").get(getUsers); 
+router.route("/users/:userId").delete(deleteUser); 
+
 
 export default router;
