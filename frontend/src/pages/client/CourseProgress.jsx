@@ -1,27 +1,4 @@
-// import { Button } from "@/components/ui/button";
-// import React from "react";
-
-// const CourseProgress = () => {
-//   return (
-//     <div className="max-w-7x1 mx-auto p-4 mt-20">
-//       <div className="flex justify-between mb-4">
-//         <h1 className="text-2xl font-bold">Course Title</h1>
-//         <Button>Completed</Button>
-//       </div>
-//       <div>
-//         <div className="flex-1 md-1/3 h-fit rounded-lg shadow-lg p-4">
-//           <video />
-//         </div>
-//         <div className="mt-2">
-//           <h3 className="fon">lecture name</h3>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CourseProgress;
-
+// solved rendering issues
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
