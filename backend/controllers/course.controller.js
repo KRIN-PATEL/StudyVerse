@@ -1,5 +1,7 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
+import { CoursePurchase } from "../models/coursePurchase.model.js";
+
 import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 
 export const createCourse = async (req, res) => {
@@ -25,6 +27,63 @@ export const createCourse = async (req, res) => {
     });
   }
 };
+
+export const searchCourse = async (req, res) => {
+  try {
+    let { query = "", categories = [], sortByPrice = "", page = 1, limit = 5 } = req.query;
+
+    if (typeof categories === "string") {
+      categories = [categories];
+    }
+
+    page = parseInt(page);
+    limit = parseInt(limit);
+    const skip = (page - 1) * limit;
+
+    const searchCriteria = {
+      isPublished: true,
+    };
+
+    if (query) {
+      searchCriteria.$or = [
+        { courseTitle: { $regex: query, $options: "i" } },
+        { subTitle: { $regex: query, $options: "i" } },
+      ];
+    }
+
+    if (categories.length > 0) {
+      searchCriteria.$and = categories.map((cat) => ({
+        category: { $regex: `^${cat}$`, $options: "i" },
+      }));
+    }
+
+    const sortOptions = {};
+    if (sortByPrice === "low") sortOptions.coursePrice = 1;
+    else if (sortByPrice === "high") sortOptions.coursePrice = -1;
+
+    const courses = await Course.find(searchCriteria)
+      .populate({ path: "creator", select: "name photoUrl" })
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Course.countDocuments(searchCriteria);
+
+    return res.status(200).json({
+      success: true,
+      courses: courses || [],
+      total,
+      page,
+      limit,
+    });
+  } catch (error) {
+    console.error("Error in searchCourse:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+
 export const getPublishedCourse = async (_,res) => {
   try {
       const courses = await Course.find({isPublished:true}).populate({path:"creator", select:"name photoUrl"});
@@ -43,7 +102,85 @@ export const getPublishedCourse = async (_,res) => {
       })
   }
 }
+export const rateCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { rating } = req.body;
+    const userId = req.id;
 
+    if (rating < 1 || rating > 5) {
+      return res.status(400).json({ message: "Rating must be between 1 and 5" });
+    }
+
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    // Check if user purchased the course
+    const purchase = await CoursePurchase.findOne({ userId, courseId, status: "completed" });
+    if (!purchase) {
+      return res.status(403).json({ message: "Only students who purchased the course can rate it" });
+    }
+
+    // Check if already rated
+    const alreadyRated = course.ratings.find(r => r.userId.toString() === userId);
+    if (alreadyRated) {
+      return res.status(400).json({ message: "You already rated this course" });
+    }
+
+    // Push new rating
+    course.ratings.push({ userId, rating });
+
+    // Update average
+    const total = course.ratings.reduce((sum, r) => sum + r.rating, 0);
+    course.averageRating = total / course.ratings.length;
+
+    await course.save();
+
+    return res.status(200).json({ message: "Thanks for your feedback!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to rate course" });
+  }
+};
+// Controller: Get All Courses for Admin
+export const getAllCourses = async (req, res) => {
+  try {
+    const courses = await Course.find()
+      .populate({ path: "creator", select: "name photoUrl" })
+      .sort({ createdAt: -1 }); 
+
+    if (!courses) {
+      return res.status(404).json({
+        message: "No courses found!",
+      });
+    }
+
+    return res.status(200).json({
+      courses,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Failed to fetch courses",
+    });
+  }
+};
+
+export const getAllCourseReviews = async (req, res) => {
+  try {
+    const courses = await Course.find({ "ratings.0": { $exists: true } })
+      .populate("creator", "name photoUrl")
+      .populate("ratings.userId", "name photoUrl")
+      .select("courseTitle courseThumbnail ratings creator");
+
+    return res.status(200).json({ courses });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Failed to get course reviews" });
+  }
+};
 export const getCreatorCourses = async (req, res) => {
   try {
     const userId = req.id;
@@ -331,3 +468,4 @@ export const togglePublishCourse = async (req,res) => {
       })
   }
 }
+

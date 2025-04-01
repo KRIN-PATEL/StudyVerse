@@ -6,11 +6,7 @@ export const getCourseProgress = async (req, res) => {
     const { courseId } = req.params;
     const userId = req.id;
 
-<<<<<<< HEAD
     // step-1 fetch the user course progress
-=======
-    // fetch the user course progress
->>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     let courseProgress = await CourseProgress.findOne({
       courseId,
       userId,
@@ -24,11 +20,7 @@ export const getCourseProgress = async (req, res) => {
       });
     }
 
-<<<<<<< HEAD
     // Step-2 If no progress found, return course details with an empty progress
-=======
-    //  If no progress found, return course details with an empty progress
->>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     if (!courseProgress) {
       return res.status(200).json({
         data: {
@@ -39,11 +31,7 @@ export const getCourseProgress = async (req, res) => {
       });
     }
 
-<<<<<<< HEAD
     // Step-3 Return the user's course progress alog with course details
-=======
-    // Return the user's course progress alog with course details
->>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     return res.status(200).json({
       data: {
         courseDetails,

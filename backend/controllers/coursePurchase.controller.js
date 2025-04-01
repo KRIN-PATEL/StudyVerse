@@ -68,6 +68,7 @@ import { Course } from "../models/course.model.js";
 import { CoursePurchase } from "../models/coursePurchase.model.js";
 import { Lecture } from "../models/lecture.model.js";
 import { User } from "../models/user.model.js";
+import { sendInvoiceEmail } from "../utils/mailer.js"; // update the path if your file is elsewhere
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -182,19 +183,40 @@ export const stripeWebhook = async (req, res) => {
 
       await purchase.save();
 
-      // Update user's enrolledCourses
-      await User.findByIdAndUpdate(
-        purchase.userId,
-        { $addToSet: { enrolledCourses: purchase.courseId._id } }, // Add course ID to enrolledCourses
-        { new: true }
-      );
+// Update user's enrolledCourses
+await User.findByIdAndUpdate(
+  purchase.userId,
+  { $addToSet: { enrolledCourses: purchase.courseId._id } },
+  { new: true }
+);
 
-      // Update course to add user ID to enrolledStudents
-      await Course.findByIdAndUpdate(
-        purchase.courseId._id,
-        { $addToSet: { enrolledStudents: purchase.userId } }, // Add user ID to enrolledStudents
-        { new: true }
-      );
+// Update course to add user ID to enrolledStudents
+await Course.findByIdAndUpdate(
+  purchase.courseId._id,
+  { $addToSet: { enrolledStudents: purchase.userId } },
+  { new: true }
+);
+
+// ✅ Send Invoice Email
+const user = await User.findById(purchase.userId);
+
+// if (user && user.email && purchase.courseId) {
+//   await sendInvoiceEmail(
+//     user.email,
+//     user.name || "Student",
+//     purchase.courseId.courseTitle,
+//     purchase.amount
+//   );
+if (user && user.email && purchase.courseId) {
+  await sendInvoiceEmail(
+    user.email,
+    user.name || "Student",
+    purchase.courseId.courseTitle,
+    purchase.amount,
+    purchase.paymentId
+  );
+}
+
     } catch (error) {
       console.error("Error handling event:", error);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -202,6 +224,30 @@ export const stripeWebhook = async (req, res) => {
   }
   res.status(200).send();
 };
+// export const getCourseDetailWithPurchaseStatus = async (req, res) => {
+//   try {
+//     const { courseId } = req.params;
+//     const userId = req.id;
+
+//     const course = await Course.findById(courseId)
+//       .populate({ path: "creator" })
+//       .populate({ path: "lectures" });
+
+//     const purchased = await CoursePurchase.findOne({ userId, courseId });
+//     console.log(purchased);
+
+//     if (!course) {
+//       return res.status(404).json({ message: "course not found!" });
+//     }
+
+//     return res.status(200).json({
+//       course,
+//       purchased: !!purchased, // true if purchased, false otherwise
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 export const getCourseDetailWithPurchaseStatus = async (req, res) => {
   try {
     const { courseId } = req.params;
@@ -211,19 +257,29 @@ export const getCourseDetailWithPurchaseStatus = async (req, res) => {
       .populate({ path: "creator" })
       .populate({ path: "lectures" });
 
-    const purchased = await CoursePurchase.findOne({ userId, courseId });
-    console.log(purchased);
-
     if (!course) {
       return res.status(404).json({ message: "course not found!" });
     }
 
+    const purchased = await CoursePurchase.findOne({ userId, courseId });
+
+    // Check if user already rated the course
+    const userRating = course.ratings.find(r => r.userId.toString() === userId);
+    const isRatedByUser = !!userRating;
+    const userRatingValue = userRating?.rating || 0;
+
     return res.status(200).json({
-      course,
-      purchased: !!purchased, // true if purchased, false otherwise
+      course: {
+        ...course.toObject(),
+        numberOfRatings: course.ratings.length,
+        isRatedByUser,
+        userRatingValue,
+      },
+      purchased: !!purchased,
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: "Failed to get course details" });
   }
 };
 
@@ -242,5 +298,103 @@ export const getAllPurchasedCourse = async (_, res) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+export const getDashboardStats = async (req, res) => {
+  try {
+    const currentYear = new Date().getFullYear();
+
+    // Monthly Enrollments & Revenue
+    const monthlyStats = await CoursePurchase.aggregate([
+      {
+        $match: {
+          status: "completed",
+          createdAt: {
+            $gte: new Date(`${currentYear}-01-01`),
+            $lt: new Date(`${currentYear + 1}-01-01`),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: "$createdAt" },
+          revenue: { $sum: "$amount" },
+          enrollments: { $sum: 1 },
+        },
+      },
+      { $sort: { "_id": 1 } },
+    ]);
+
+    const monthNames = [
+      "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    const courseEnrollmentData = monthlyStats.map((stat) => ({
+      month: monthNames[stat._id],
+      enrollments: stat.enrollments,
+    }));
+
+    const revenueData = monthlyStats.map((stat) => ({
+      month: monthNames[stat._id],
+      revenue: stat.revenue,
+    }));
+
+    // Course Category Distribution
+    const courseCategoryData = await Course.aggregate([
+      { $match: { isPublished: true } },
+      {
+        $group: {
+          _id: "$category",
+          value: { $sum: 1 },
+        },
+      },
+    ]).then((data) =>
+      data.map((entry) => ({
+        category: entry._id,
+        value: entry.value,
+      }))
+    );
+
+    // Monthly Active Users (based on purchases)
+    const monthlyUsers = await CoursePurchase.aggregate([
+      {
+        $match: {
+          status: "completed",
+          createdAt: {
+            $gte: new Date(`${currentYear}-01-01`),
+            $lt: new Date(`${currentYear + 1}-01-01`),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: "$createdAt" },
+          users: { $addToSet: "$userId" },
+        },
+      },
+      {
+        $project: {
+          month: "$_id",
+          users: { $size: "$users" },
+        },
+      },
+      { $sort: { month: 1 } },
+    ]);
+
+    const monthlyActiveUsersData = monthlyUsers.map((stat) => ({
+      month: monthNames[stat.month],
+      users: stat.users,
+    }));
+
+    return res.status(200).json({
+      courseEnrollmentData,
+      revenueData,
+      courseCategoryData,
+      monthlyActiveUsersData,
+    });
+  } catch (error) {
+    console.error("Dashboard Stats Error:", error);
+    res.status(500).json({ message: "Failed to fetch dashboard stats" });
   }
 };
