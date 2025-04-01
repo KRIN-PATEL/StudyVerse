@@ -28,7 +28,7 @@ const SearchPage = () => {
   const handleFilterChange = (categories, price) => {
     setSelectedCatgories(categories);
     setSortByPrice(price);
-    setPage(1); // Reset to first page when filters change
+    setPage(1); 
   };
 
   return (
