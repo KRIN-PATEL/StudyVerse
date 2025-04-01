@@ -54,7 +54,7 @@ const SearchPage = () => {
                 <SearchResult key={course._id} course={course} />
               ))}
 
-              {/* ✅ Pagination Buttons */}
+              
               {data?.total > limit && (
                 <div className="flex justify-center mt-8 gap-4">
                   <Button
