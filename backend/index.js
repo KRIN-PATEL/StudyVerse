@@ -10,6 +10,8 @@ import mediaRoute from "./routes/media.route.js";
 import { createCourse } from "./controllers/course.controller.js";
 dotenv.config({});
 import  CourseProgressRoute  from "./routes/courseProgress.route.js";
+import contactRoutes from "./routes/contactRoutes.js";
+
 
 connectDB();
 
@@ -26,7 +28,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/media", mediaRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
