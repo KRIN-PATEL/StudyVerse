@@ -62,3 +62,4 @@ const StarRating = ({ courseId, isRatedByUser, initialRating }) => {
 };
 
 export default StarRating;
+// rating component
