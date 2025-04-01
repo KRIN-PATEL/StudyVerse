@@ -134,7 +134,7 @@ export const courseApi = createApi({
         url: `/${courseId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Refetch_Creator_Course"],
+      invalidatesTags: ["Refetch_Creator_Course"], //refatch creator course
     }),
   }),
 });
