@@ -16,6 +16,32 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch_Creator_Course"],
     }),
+    getSearchCourse: builder.query({
+      query: ({ searchQuery, categories, sortByPrice, page, limit }) => {
+        const params = new URLSearchParams();
+
+        if (searchQuery) params.append("query", searchQuery);
+
+        if (Array.isArray(categories)) {
+          categories.forEach((cat) => params.append("categories", cat));
+        }
+
+        if (sortByPrice) params.append("sortByPrice", sortByPrice);
+        if (page) params.append("page", page);
+        if (limit) params.append("limit", limit);
+
+        return {
+          url: `/search?${params.toString()}`,
+          method: "GET",
+        };
+      },
+    }),
+   getAllCourses: builder.query({
+  query: () => ({
+    url: "/",
+    method: "GET",
+  }),
+}),
     getPublishedCourse: builder.query({
       query: () => ({
         url: "/published-courses",
@@ -83,6 +109,19 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+    rateCourse: builder.mutation({
+      query: ({ courseId, rating }) => ({
+        url: `/${courseId}/rate`,
+        method: "POST",
+        body: { rating },
+      }),
+    }),
+    getAllCourseReviews: builder.query({
+      query: () => ({
+        url: "/reviews",
+        method: "GET",
+      }),
+    }),
 
     publishCourse: builder.mutation({
       query: ({ courseId, query }) => ({
@@ -102,6 +141,7 @@ export const courseApi = createApi({
 
 export const {
   useCreateCourseMutation,
+  useGetSearchCourseQuery,
   useGetCreatorCourseQuery,
   useEditCourseMutation,
   useGetCourseByIdQuery,
@@ -113,4 +153,7 @@ export const {
   usePublishCourseMutation,
   useDeleteCourseMutation,
   useGetPublishedCourseQuery,
+  useRateCourseMutation,
+  useGetAllCourseReviewsQuery,
+  useGetAllCoursesQuery,
 } = courseApi;

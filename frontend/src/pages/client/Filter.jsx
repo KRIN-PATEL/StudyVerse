@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
@@ -54,18 +53,10 @@ const Filter = ({ handleFilterChange }) => {
     handleFilterChange([], "");
   };
 
-=======
-import { Select, SelectValue } from "@/components/ui/select";
-import { SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, Separator } from "@radix-ui/react-select";
-import React from "react";
-
-const Filter = () => {
->>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
   return (
     <div className="w-full md:w-[20%]">
       <div className="flex items-center justify-between">
         <h1 className="font-semibold text-lg md:text-xl">Filter Options</h1>
-<<<<<<< HEAD
         <Select onValueChange={selectByPriceHandler} value={sortByPrice}>
           <SelectTrigger>
             <SelectValue placeholder="Sort by" />
@@ -109,25 +100,6 @@ const Filter = () => {
       >
         Reset Filters
       </Button>
-=======
-        <Select>
-            <SelectTrigger>
-                <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-                <SelectGroup>
-                <SelectLabel>SORT BY PRICE</SelectLabel>
-                <SelectItem value="low">Low to High</SelectItem>
-                <SelectItem value="high">High to Low</SelectItem>
-                </SelectGroup>
-            </SelectContent>
-        </Select>
-      </div>
-      <Separator className="my-4" />
-      <div>
-        <h1 className="font-semibold mb-2">CATEGORY</h1>
-      </div>
->>>>>>> 9bafa994e1735c0374a9f3aa4dff394f09dfe2b1
     </div>
   );
 };
