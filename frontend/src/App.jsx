@@ -10,7 +10,7 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyOTP from "./pages/VerifyOTP";
 import ResetPassword from "./pages/ResetPassword";
-import  Sidebar  from "./pages/admin/Sidebar";
+import Sidebar from "./pages/admin/Sidebar";
 import Dashboard from "./pages/admin/Dashboard";
 import CourseTable from "./pages/admin/course/CourseTable";
 import AddCourse from "./pages/admin/course/AddCourse";
@@ -24,7 +24,9 @@ import ReviewTable from "./pages/admin/ReviewTable";
 import Users from "./pages/admin/Users";
 import UserDetailPage from "./pages/admin/UserDetailPage";
 import ManageCourses from "./pages/admin/ManageCourses";
-
+import ContactUs from "./pages/client/ContactUs";
+import PageNotFound from "./components/PageNotFound";
+import AboutUs from "./pages/client/AboutUs";
 
 const appRouter = createBrowserRouter([
   {
@@ -40,6 +42,15 @@ const appRouter = createBrowserRouter([
           </>
         ),
       },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
+
       {
         path: "/login",
         element: <Login />,
@@ -83,14 +94,14 @@ const appRouter = createBrowserRouter([
       //admin route
       {
         path: "admin",
-        element: <Sidebar/>,
+        element: <Sidebar />,
         children: [
           {
             path: "dashboard",
             element: <Dashboard />,
           },
           {
-            path: "manage-courses",  // New route
+            path: "manage-courses", // New route
             element: <ManageCourses />,
           },
           {
@@ -125,12 +136,13 @@ const appRouter = createBrowserRouter([
             path: "user/:userId", // Fixed relative path
             element: <UserDetailPage />, // Add Users route
           },
-
-          
         ],
       },
+      {
+        path: "*",
+        element: <PageNotFound />,
+      },
     ],
-  
   },
 ]);
 
