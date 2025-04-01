@@ -14,7 +14,7 @@ const StarRating = ({ courseId, isRatedByUser, initialRating }) => {
 
     try {
       await rateCourse({ courseId, rating: value }).unwrap();
-      toast.success("Thanks for your feedback!", { duration: 3000 });
+      toast.success("Thanks for your feedback!", { duration: 3000 }); // toast  message
       setRating(value);
       setHasRated(true);
     } catch (err) {
