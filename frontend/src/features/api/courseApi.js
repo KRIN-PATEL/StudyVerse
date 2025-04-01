@@ -157,3 +157,4 @@ export const {
   useGetAllCourseReviewsQuery,
   useGetAllCoursesQuery,
 } = courseApi;
+// course api 
