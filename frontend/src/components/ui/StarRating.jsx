@@ -32,7 +32,7 @@ const StarRating = ({ courseId, isRatedByUser, initialRating }) => {
             size={28}
             className="text-yellow-400 fill-yellow-400 cursor-pointer transition-transform hover:scale-110"
             onClick={() => handleClick(star)}
-            onMouseEnter={() => setHovered(star)}
+            onMouseEnter={() => setHovered(star)} // rating  hovered effect  added
             onMouseLeave={() => setHovered(0)}
           />
         ) : diff >= 0.5 ? (
