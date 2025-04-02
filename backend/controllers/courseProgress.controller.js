@@ -125,7 +125,7 @@ export const markAsInCompleted = async (req, res) => {
   
       const courseProgress = await CourseProgress.findOne({ courseId, userId });
       if (!courseProgress)
-        return res.status(404).json({ message: "Course progress not found" });
+        return res.status(404).json({ message: "Course progress not found" }); // erro message for course progress if course not found
   
       courseProgress.lectureProgress.map(
         (lectureProgress) => (lectureProgress.viewed = false)
