@@ -111,3 +111,4 @@ const UserDetailPage = () => {
 };
 
 export default UserDetailPage;
+//user  detail page
