@@ -43,3 +43,4 @@ useUpdateLectureProgressMutation,
 useCompleteCourseMutation,
 useInCompleteCourseMutation
 } = courseProgressApi;
+//courseProgressApi
