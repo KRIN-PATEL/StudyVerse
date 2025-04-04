@@ -105,7 +105,7 @@ const ReviewTable = () => {
                 </div>
               </div>
 
-              {/* Ratings */}
+              {/* Ratings displays */}
               <div className="space-y-3 mt-4">
                 {course.ratings.map((r, idx) => (
                   <div key={idx} className="flex items-center gap-3">
