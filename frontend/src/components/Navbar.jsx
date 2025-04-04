@@ -62,17 +62,19 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full px-6">
           {/* Logo & Title */}
           <div className="flex items-center gap-3">
-            <Avatar className="h-20 w-20 mt-3">
-              <AvatarImage
-                className="h-full w-full object-contain"
-                src={logo}
-                alt="Logo"
-              />
-              <AvatarFallback>SV</AvatarFallback>
-            </Avatar>
-            <h1 className="font-extrabold text-2xl text-gray-800 dark:text-white">
-              StudyVerse
-            </h1>
+            <Link to="/" className="flex items-center gap-3">
+              <Avatar className="h-20 w-20 mt-3">
+                <AvatarImage
+                  className="h-full w-full object-contain"
+                  src={logo}
+                  alt="Logo"
+                />
+                <AvatarFallback>SV</AvatarFallback>
+              </Avatar>
+              <h1 className="font-extrabold text-2xl text-gray-800 dark:text-white">
+                StudyVerse
+              </h1>
+            </Link>
           </div>
 
           {/* Navbar */}
@@ -104,6 +106,12 @@ const Navbar = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Link to="profile"> Edit Profile</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link to="/contact">Contact</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link to="/aboutus">About Us</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={logoutHandler}>
                       Logout
@@ -215,6 +223,7 @@ const MobileNavbar = () => {
         <nav className="flex flex-col space-y-4">
           <span>My Learning</span>
           <span>Edit Profile</span>
+          <span>Log Out</span>
           <span>Log Out</span>
         </nav>
         {role === "instructor" && (
