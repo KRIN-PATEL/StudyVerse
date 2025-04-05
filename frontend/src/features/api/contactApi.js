@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const CONTACT_API = "http://localhost:1552/api/v1/contact";
-
+// url of backend 
 
 export const contactApi = createApi({
   reducerPath: "contactApi",
