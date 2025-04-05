@@ -42,6 +42,7 @@ const appRouter = createBrowserRouter([
           </>
         ),
       },
+      //krin route of contact
       {
         path: "/contact",
         element: <ContactUs />,
