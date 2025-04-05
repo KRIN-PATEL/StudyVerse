@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import CountUp from "react-countup";
 
-// Importing images from src/assets
 import harshImg from "@/assets/harsh.jpg";
 import yashImg from "@/assets/yash.jpg";
 import krinImg from "@/assets/krin.jpg";
@@ -22,7 +21,7 @@ const teamMembers = [
   {
     name: "Krin Shaileshkumar Patel",
     role: "Full Stack Developer",
-    image: krinImg,
+    image: krinImg, 
     bio: "Focused on backend architecture and database management using Node.js and MongoDB.",
   },
 ];
