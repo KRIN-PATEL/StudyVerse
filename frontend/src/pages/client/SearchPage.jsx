@@ -97,7 +97,7 @@ const CourseNotFound = () => {
         Sorry, we couldn't find the course you're looking for.
       </p>
       <Link to="/" className="italic">
-        <Button variant="link">Browse All Courses</Button>
+        <Button variant="link">Browse All Courses</Button> // browse all courses
       </Link>
     </div>
   );
