@@ -42,12 +42,12 @@ const appRouter = createBrowserRouter([
           </>
         ),
       },
-      //krin route of contact
+      
       {
         path: "/contact",
         element: <ContactUs />,
       },
-      // harsh about us
+      
       {
         path: "/aboutus",
         element: <AboutUs />,
