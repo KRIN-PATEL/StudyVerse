@@ -103,7 +103,7 @@ const appRouter = createBrowserRouter([
             element: <Dashboard />,
           },
           {
-            path: "manage-courses", // New route
+            path: "manage-courses", 
             element: <ManageCourses />,
           },
           {
@@ -132,11 +132,11 @@ const appRouter = createBrowserRouter([
           },
           {
             path: "users",
-            element: <Users />, // Add Users route
+            element: <Users />, 
           },
           {
-            path: "user/:userId", // Fixed relative path
-            element: <UserDetailPage />, // Add Users route
+            path: "user/:userId", 
+            element: <UserDetailPage />, 
           },
         ],
       },
