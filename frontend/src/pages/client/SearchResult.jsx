@@ -32,3 +32,4 @@ const SearchResult = ({ course }) => {
 };
 
 export default SearchResult;
+//search result
