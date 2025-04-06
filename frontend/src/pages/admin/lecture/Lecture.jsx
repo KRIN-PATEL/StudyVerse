@@ -23,3 +23,4 @@ const Lecture = ({ lecture, courseId, index }) => {
 };
 
 export default Lecture;
+//lecture
