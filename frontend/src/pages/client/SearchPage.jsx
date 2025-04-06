@@ -125,3 +125,4 @@ const CourseSkeleton = () => {
     </div>
   );
 };
+//search page
