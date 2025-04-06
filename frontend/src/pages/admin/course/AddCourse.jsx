@@ -136,4 +136,4 @@ const AddCourse = () => {
 
 export default AddCourse;
 
-//add  course
+//add  course MODULE
