@@ -140,4 +140,4 @@ const CourseDetail = () => {
 };
 
 export default CourseDetail;
-//course detail componenet
+//course detail componenets
