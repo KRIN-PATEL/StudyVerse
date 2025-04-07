@@ -105,4 +105,4 @@ const Filter = ({ handleFilterChange }) => {
 };
 
 export default Filter;
-//filter 
+//filter category
