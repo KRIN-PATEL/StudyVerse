@@ -10,7 +10,7 @@ export const appStore = configureStore({
     reducer: rootReducer,
     middleware:(defaultMiddleware) => defaultMiddleware().concat(authApi.middleware,courseApi.middleware, purchaseApi.middleware, courseProgressApi.middleware, contactApi.middleware ),
 });
-// Added middleware 
+
 const initializeApp = async () => {
     await appStore.dispatch(authApi.endpoints.loadUser.initiate({},{forceRefetch:true}))
 }
