@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useGetAllCoursesQuery, useDeleteCourseMutation } from "@/features/api/courseApi"; 
-import { Trash, Edit, Filter } from "lucide-react"; 
-import { Link } from "react-router-dom"; 
+import {
+  useGetAllCoursesQuery,
+  useDeleteCourseMutation,
+} from "@/features/api/courseApi";
+import { Trash, Edit, Filter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ManageCourses = () => {
-  const { data, isLoading, isError } = useGetAllCoursesQuery(); 
-  const [deleteCourse] = useDeleteCourseMutation(); 
+  const { data, isLoading, isError } = useGetAllCoursesQuery();
+  const [deleteCourse] = useDeleteCourseMutation();
 
-  const [filter, setFilter] = useState('all'); 
-  const [courses, setCourses] = useState(data?.courses || []); 
+  const [filter, setFilter] = useState("all");
+  const [courses, setCourses] = useState(data?.courses || []);
 
   useEffect(() => {
     setCourses(data?.courses || []);
@@ -16,35 +19,32 @@ const ManageCourses = () => {
 
   const handleDelete = async (courseId) => {
     try {
-      
-      setCourses(courses.filter(course => course._id !== courseId));
-      
-      
-      await deleteCourse(courseId).unwrap(); 
+      setCourses(courses.filter((course) => course._id !== courseId));
+
+      await deleteCourse(courseId).unwrap();
     } catch (error) {
       console.error("Error deleting course:", error);
-      
+
       setCourses(data?.courses || []);
     }
   };
-
 
   const handleFilterChange = (filterValue) => {
     setFilter(filterValue);
   };
 
-  
-  const filteredCourses = filter === 'all' 
-    ? courses 
-    : courses.filter(course => course.isPublished.toString() === filter);
+  const filteredCourses =
+    filter === "all"
+      ? courses
+      : courses.filter((course) => course.isPublished.toString() === filter);
 
   if (isLoading) return <p className="text-center mt-10">Loading courses...</p>;
-  if (isError) return <p className="text-center text-red-500">Failed to load courses</p>;
+  if (isError)
+    return <p className="text-center text-red-500">Failed to load courses</p>;
 
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-3xl font-semibold mb-6">Manage Courses</h1>
-
 
       <div className="flex items-center space-x-4 mb-6">
         <div className="flex items-center gap-2">
@@ -53,19 +53,19 @@ const ManageCourses = () => {
         </div>
         <div className="flex space-x-4">
           <button
-            onClick={() => handleFilterChange('all')}
+            onClick={() => handleFilterChange("all")}
             className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-md transition duration-300"
           >
             All Courses
           </button>
           <button
-            onClick={() => handleFilterChange('true')}
+            onClick={() => handleFilterChange("true")}
             className="bg-green-500 hover:bg-green-700 text-white px-6 py-3 rounded-md transition duration-300"
           >
             Published
           </button>
           <button
-            onClick={() => handleFilterChange('false')}
+            onClick={() => handleFilterChange("false")}
             className="bg-red-500 hover:bg-red-700 text-white px-6 py-3 rounded-md transition duration-300"
           >
             Unpublished
@@ -73,7 +73,6 @@ const ManageCourses = () => {
         </div>
       </div>
 
-      
       <table className="min-w-full table-auto border-separate border-spacing-2 shadow-lg rounded-lg overflow-hidden">
         <thead className="bg-gray-100 text-gray-700">
           <tr>
@@ -85,12 +84,14 @@ const ManageCourses = () => {
         </thead>
         <tbody className="text-gray-800">
           {filteredCourses?.map((course) => (
-            <tr key={course._id} className="bg-white hover:bg-gray-50 transition duration-300">
+            <tr
+              key={course._id}
+              className="bg-white hover:bg-gray-50 transition duration-300"
+            >
               <td className="px-6 py-4">{course.courseTitle}</td>
               <td className="px-6 py-4">{course.category}</td>
               <td className="px-6 py-4">${course.coursePrice}</td>
               <td className="px-6 py-4 flex space-x-2">
-
                 <Link
                   to={`/admin/course/${course._id}`}
                   className="bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded-md transition duration-300"
@@ -98,7 +99,6 @@ const ManageCourses = () => {
                   <Edit size={16} />
                   Edit
                 </Link>
-
 
                 <button
                   onClick={() => handleDelete(course._id)}
