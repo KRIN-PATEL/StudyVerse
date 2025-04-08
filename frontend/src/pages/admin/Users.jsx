@@ -17,7 +17,7 @@ const Users = () => {
   const handleDelete = async (userId) => {
     try {
       await deleteUser(userId); 
-      setUsers(users.filter((user) => user._id !== userId)); // Remove the user from the UI
+      setUsers(users.filter((user) => user._id !== userId)); 
     } catch (err) {
       console.error("Error deleting user:", err);
     }
@@ -52,7 +52,7 @@ const Users = () => {
                   <AvatarImage
                     src={user?.photoUrl || "https://github.com/shadcn.png"}
                     alt={user?.name || "User Avatar"}
-                    className="rounded-full"  // Ensure the image is circular
+                    className="rounded-full"  
                   />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
