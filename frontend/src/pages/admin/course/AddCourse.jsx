@@ -136,3 +136,4 @@ const AddCourse = () => {
 
 export default AddCourse;
 
+// solved error of publishing
