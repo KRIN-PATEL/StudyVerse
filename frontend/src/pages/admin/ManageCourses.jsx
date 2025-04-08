@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useGetAllCoursesQuery, useDeleteCourseMutation } from "@/features/api/courseApi"; // Updated API hook
-import { Trash, Edit, Filter } from "lucide-react"; // Icons for delete, edit, and filter
-import { Link } from "react-router-dom"; // Link to navigate to the course details/edit page
+import { useGetAllCoursesQuery, useDeleteCourseMutation } from "@/features/api/courseApi"; 
+import { Trash, Edit, Filter } from "lucide-react"; 
+import { Link } from "react-router-dom"; 
 
 const ManageCourses = () => {
-  const { data, isLoading, isError } = useGetAllCoursesQuery(); // Use the updated hook
-  const [deleteCourse] = useDeleteCourseMutation(); // For deleting a course
+  const { data, isLoading, isError } = useGetAllCoursesQuery(); 
+  const [deleteCourse] = useDeleteCourseMutation(); 
 
-  const [filter, setFilter] = useState('all'); // Filter state (all, published, unpublished)
-  const [courses, setCourses] = useState(data?.courses || []); // Local state to manage courses after deletion
+  const [filter, setFilter] = useState('all'); 
+  const [courses, setCourses] = useState(data?.courses || []); 
 
   useEffect(() => {
     setCourses(data?.courses || []);
@@ -16,24 +16,24 @@ const ManageCourses = () => {
 
   const handleDelete = async (courseId) => {
     try {
-      // Optimistically update UI by removing the deleted course from local state
+      
       setCourses(courses.filter(course => course._id !== courseId));
       
-      // Proceed with deleting the course from the server
-      await deleteCourse(courseId).unwrap(); // Use unwrap for handling mutation success
+      
+      await deleteCourse(courseId).unwrap(); 
     } catch (error) {
       console.error("Error deleting course:", error);
-      // If deletion fails, revert the optimistic update by re-fetching the courses
+      
       setCourses(data?.courses || []);
     }
   };
 
-  // Handle filter change
+
   const handleFilterChange = (filterValue) => {
     setFilter(filterValue);
   };
 
-  // Filter courses based on filter state
+  
   const filteredCourses = filter === 'all' 
     ? courses 
     : courses.filter(course => course.isPublished.toString() === filter);
@@ -45,7 +45,7 @@ const ManageCourses = () => {
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-3xl font-semibold mb-6">Manage Courses</h1>
 
-      {/* Filter Section */}
+
       <div className="flex items-center space-x-4 mb-6">
         <div className="flex items-center gap-2">
           <Filter size={20} />
@@ -73,7 +73,7 @@ const ManageCourses = () => {
         </div>
       </div>
 
-      {/* Courses Table */}
+      
       <table className="min-w-full table-auto border-separate border-spacing-2 shadow-lg rounded-lg overflow-hidden">
         <thead className="bg-gray-100 text-gray-700">
           <tr>
@@ -90,7 +90,7 @@ const ManageCourses = () => {
               <td className="px-6 py-4">{course.category}</td>
               <td className="px-6 py-4">${course.coursePrice}</td>
               <td className="px-6 py-4 flex space-x-2">
-                {/* Edit button */}
+
                 <Link
                   to={`/admin/course/${course._id}`}
                   className="bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded-md transition duration-300"
@@ -99,7 +99,7 @@ const ManageCourses = () => {
                   Edit
                 </Link>
 
-                {/* Delete button */}
+
                 <button
                   onClick={() => handleDelete(course._id)}
                   className="bg-red-500 hover:bg-red-700 text-white px-6 py-2 rounded-md transition duration-300"
