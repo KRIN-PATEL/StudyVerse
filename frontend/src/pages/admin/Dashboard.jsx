@@ -54,7 +54,6 @@ const Dashboard = () => {
   return (
     <div className="grid gap-6 grid-cols-1 mt-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     
-      {/* 📌 Dashboard Overview */}
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-black-700 dark:text-gray-300">
@@ -67,7 +66,7 @@ const Dashboard = () => {
           </p>
         </CardContent>
       </Card>
- {/* 💡 Summary Cards: Total Sales & Revenue */}
+
 <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
   <CardHeader>
     <CardTitle>Total Sales</CardTitle>
@@ -92,7 +91,7 @@ const Dashboard = () => {
   </CardContent>
 </Card>
 
-{/* 💵 Course Prices (Purchased Courses) - Full Width */}
+
 <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full bg-white dark:bg-gray-900">
   <CardHeader>
     <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
@@ -126,7 +125,7 @@ const Dashboard = () => {
   </CardContent>
 </Card>
 
-      {/* 📊 Course Enrollment Statistics */}
+
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
@@ -145,7 +144,7 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* 💰 Revenue Trends */}
+      
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
@@ -165,7 +164,7 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* 📚 Course Category Distribution */}
+      
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
@@ -208,7 +207,7 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* 👥 Monthly Active Users */}
+      
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
