@@ -27,7 +27,6 @@ const CourseTable = () => {
   const createCourseHandler = async () => {
     navigate("create");
 
-    // Wait for a short delay before refetching to ensure data is updated
     setTimeout(() => {
       refetch();
       toast.success("New course added!", { style: { color: "green" } });
