@@ -21,3 +21,4 @@ const EditCourse = () => {
 };
 
 export default EditCourse;
+//edit course
