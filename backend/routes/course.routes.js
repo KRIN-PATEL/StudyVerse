@@ -27,3 +27,4 @@ router.delete("/:courseId", deleteCourse);
 
 
 export default router;
+//course  route  
