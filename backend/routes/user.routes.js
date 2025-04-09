@@ -32,3 +32,4 @@ router.route("/users/:userId").delete(deleteUser);
 
 
 export default router;
+//user route
