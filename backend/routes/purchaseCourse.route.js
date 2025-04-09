@@ -13,3 +13,4 @@ router.route("/").get(isAuthenticated, getAllPurchasedCourse);
 
 router.get("/stats", isAuthenticated, getDashboardStats);
 export default router;
+//purchase  route
