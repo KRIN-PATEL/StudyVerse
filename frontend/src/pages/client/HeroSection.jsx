@@ -81,3 +81,4 @@ const navigate = useNavigate();
 };
 
 export default HeroSection;
+//hero section
