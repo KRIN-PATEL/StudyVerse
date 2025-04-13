@@ -1,21 +1,6 @@
 import Quiz from "../models/quiz.model.js";
 import {Course} from "../models/course.model.js"; 
 
-// Create a quiz for a course
-// export const createQuiz = async (req, res) => {
-//   try {
-//     const { courseId, questions, timeLimit } = req.body;
-//     const course = await Course.findById(courseId);
-//     if (!course) return res.status(404).json({ message: "Course not found" });
-
-//     const quiz = new Quiz({ courseId, questions, timeLimit });
-//     await quiz.save();
-
-//     res.status(201).json({ success: true, message: "Quiz created successfully", quiz });
-//   } catch (error) {
-//     res.status(500).json({ success: false, message: error.message });
-//   }
-// };
 
 export const createQuiz = async (req, res) => {
   try {
