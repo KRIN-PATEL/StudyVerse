@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";  // For dynamic routing
-import { useGetUsersQuery } from "@/features/api/authApi"; // Importing the query for fetching users
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";  // Avatar components
-import { Button } from "@/components/ui/button"; // Import the button component
+import { useParams, useNavigate } from "react-router-dom";
+import { useGetUsersQuery } from "@/features/api/authApi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 const UserDetailPage = () => {
-  const { userId } = useParams();  // Get the userId from the URL
-  const { data, isLoading, error } = useGetUsersQuery();  // Fetch all users
+  const { userId } = useParams();
+  const { data, isLoading, error } = useGetUsersQuery();
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();  // For navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
@@ -30,13 +30,15 @@ const UserDetailPage = () => {
   }
 
   const handleBackClick = () => {
-    navigate("/admin/users");  // Navigate back to the Users page
+    navigate("/admin/users"); // Navigate back to the Users page
   };
 
   return (
     <div className="max-w-4xl mx-auto px-4 mt-20 my-10">
-      <h1 className="font-bold text-2xl text-center md:text-left">User Details</h1>
-      
+      <h1 className="font-bold text-2xl text-center md:text-left">
+        User Details
+      </h1>
+
       {/* Back Button */}
       <button
         onClick={handleBackClick}
@@ -44,7 +46,7 @@ const UserDetailPage = () => {
       >
         Back to Users
       </button>
-      
+
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 my-5">
         <div className="flex flex-col items-center">
           <Avatar className="h-24 w-24 md:h-32 md:w-32 mb-4">
@@ -96,7 +98,9 @@ const UserDetailPage = () => {
                 className="bg-gray-100 p-4 rounded-md transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
                 <img
-                  src={course.courseThumbnail || "https://via.placeholder.com/150"} // Display course image
+                  src={
+                    course.courseThumbnail || "https://via.placeholder.com/150"
+                  } // Display course image
                   alt={course.courseTitle}
                   className="w-full h-48 object-cover rounded-md mb-4"
                 />

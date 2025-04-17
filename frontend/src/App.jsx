@@ -23,9 +23,21 @@ import SearchPage from "./pages/client/SearchPage";
 import ReviewTable from "./pages/admin/ReviewTable";
 import Users from "./pages/admin/Users";
 import UserDetailPage from "./pages/admin/UserDetailPage";
+import QuizManagement from "./pages/admin/QuizManagement";
+import CreateQuiz from "./pages/admin/CreateQuiz";
+import EditQuiz from "./pages/admin/EditQuiz";
+import QuizPage from "./pages/client/QuizPage";
+import QuizResult from "./pages/client/QuizResult";
 import ManageCourses from "./pages/admin/ManageCourses";
 import ContactUs from "./pages/client/ContactUs";
 import PageNotFound from "./components/PageNotFound";
+import AboutUs from "./pages/client/AboutUs";
+import {
+  AdminRoute,
+  AuthenticatedUser,
+  ProtectedRoute,
+} from "./components/ProtectedRoutes";
+import PurchaseCourseProtectedRoute from "./components/PurchaseCourseProtectedRoute";
 
 const appRouter = createBrowserRouter([
   {
@@ -45,10 +57,18 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <ContactUs />,
       },
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
 
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <AuthenticatedUser>
+            <Login />
+          </AuthenticatedUser>
+        ),
       },
       {
         path: "/signup",
@@ -56,11 +76,19 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/my-learning",
-        element: <MyLearning />,
+        element: (
+          <ProtectedRoute>
+            <MyLearning />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "course/search",
@@ -72,7 +100,13 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/course-progress/:courseId",
-        element: <CourseProgress />,
+        element: (
+          <ProtectedRoute>
+            <PurchaseCourseProtectedRoute>
+              <CourseProgress />
+            </PurchaseCourseProtectedRoute>
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/forgot-password",
@@ -86,10 +120,17 @@ const appRouter = createBrowserRouter([
         path: "/reset-password",
         element: <ResetPassword />,
       },
+
+      { path: "/quiz/:courseId", element: <QuizPage /> },
+      { path: "/quiz/result/:courseId", element: <QuizResult /> },
       //admin route
       {
         path: "admin",
-        element: <Sidebar />,
+        element: (
+          <AdminRoute>
+            <Sidebar />
+          </AdminRoute>
+        ),
         children: [
           {
             path: "dashboard",
@@ -131,6 +172,16 @@ const appRouter = createBrowserRouter([
             path: "user/:userId", // Fixed relative path
             element: <UserDetailPage />, // Add Users route
           },
+          {
+            path: "quiz-management", //
+            element: <QuizManagement />,
+          },
+          {
+            path: "quiz/create",
+            element: <CreateQuiz />,
+          },
+          { path: "quiz/create/:courseId", element: <CreateQuiz /> },
+          { path: "quiz/edit/:quizId", element: <EditQuiz /> },
         ],
       },
       {

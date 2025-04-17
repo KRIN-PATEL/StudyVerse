@@ -44,23 +44,30 @@ const Course = ({ course }) => {
             <span>${course.coursePrice}</span>
           </div>
 
-<div className="flex items-center gap-1 mt-1">
-  {[1, 2, 3, 4, 5].map((star) => {
-    const diff = averageRating - star + 1;
-    return diff >= 1 ? (
-      <Star key={star} size={22} className="text-yellow-400 fill-yellow-400" />
-    ) : diff >= 0.5 ? (
-      <StarHalf key={star} size={22} className="text-yellow-400 fill-yellow-400" />
-    ) : (
-      <Star key={star} size={22} className="text-gray-300" />
-    );
-  })}
-  <span className="text-lg font-semibold text-muted-foreground ml-3">
-    {averageRating.toFixed(1)}{" "}
-    <span className="text-sm text-gray-400">({numberOfRatings})</span>
-  </span>
-</div>
-
+          <div className="flex items-center gap-1 mt-1">
+            {[1, 2, 3, 4, 5].map((star) => {
+              const diff = averageRating - star + 1;
+              return diff >= 1 ? (
+                <Star
+                  key={star}
+                  size={22}
+                  className="text-yellow-400 fill-yellow-400"
+                />
+              ) : diff >= 0.5 ? (
+                <StarHalf
+                  key={star}
+                  size={22}
+                  className="text-yellow-400 fill-yellow-400"
+                />
+              ) : (
+                <Star key={star} size={22} className="text-gray-300" />
+              );
+            })}
+            <span className="text-lg font-semibold text-muted-foreground ml-3">
+              {averageRating.toFixed(1)}{" "}
+              <span className="text-sm text-gray-400">({numberOfRatings})</span>
+            </span>
+          </div>
         </CardContent>
       </Card>
     </Link>

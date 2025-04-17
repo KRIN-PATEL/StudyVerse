@@ -36,12 +36,12 @@ export const courseApi = createApi({
         };
       },
     }),
-   getAllCourses: builder.query({
-  query: () => ({
-    url: "/",
-    method: "GET",
-  }),
-}),
+    getAllCourses: builder.query({
+      query: () => ({
+        url: "/",
+        method: "GET",
+      }),
+    }),
     getPublishedCourse: builder.query({
       query: () => ({
         url: "/published-courses",

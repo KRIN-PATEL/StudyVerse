@@ -79,7 +79,7 @@ const Filter = ({ handleFilterChange }) => {
           <div className="flex items-center space-x-2 my-2" key={category.id}>
             <Checkbox
               id={category.id}
-              checked={selectedCategories.includes(category.id)} 
+              checked={selectedCategories.includes(category.id)}
               onCheckedChange={() => handleCategoryChange(category.id)}
             />
             <Label
@@ -92,12 +92,7 @@ const Filter = ({ handleFilterChange }) => {
         ))}
       </div>
 
-      
-      <Button
-        variant="outline"
-        className="mt-4 w-full"
-        onClick={resetFilters}
-      >
+      <Button variant="outline" className="mt-4 w-full" onClick={resetFilters}>
         Reset Filters
       </Button>
     </div>

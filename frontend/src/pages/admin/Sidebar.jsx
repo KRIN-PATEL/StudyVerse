@@ -1,211 +1,130 @@
-
-// import { ChartNoAxesColumn, SquareLibrary } from "lucide-react";
-// import React from "react";
-// import { Link, Outlet } from "react-router-dom";
-
-// const Sidebar = () => {
-//   return (
-//     <div className="flex">
-//       <div className="hidden lg:block w-[250px] sm:w-[300px] space-y-8 border-r border-gray-300 dark:border-gray-700 mt-20  p-5 sticky top-0  h-screen">
-//         <div className="space-y-4 ">
-//           <Link to="dashboard" className="flex items-center gap-2">
-//             <ChartNoAxesColumn size={22} />
-//             <h1>Dashboard</h1>
-//           </Link>
-//           <Link to="course" className="flex items-center gap-2">
-//             <SquareLibrary size={22} />
-//             <h1>Courses</h1>
-//           </Link>
-//         </div>
-//       </div>
-//     <div className="flex-1 p-10 ">
-//         <Outlet/>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
-
-
-
-// import { ChartNoAxesColumn, SquareLibrary, Users } from "lucide-react";
-// import React from "react";
-// import { Link, Outlet } from "react-router-dom";
-// import logo from "@/assets/logo.jpg";
-
-// const Sidebar = () => {
-//   return (
-//     <div className="flex">
-//       {/* Sidebar */}
-//       <div className="hidden lg:flex flex-col w-[250px] sm:w-[300px] border-r border-gray-300 dark:border-gray-700 p-5 sticky top-0 h-screen bg-white dark:bg-gray-900 shadow-lg">
-//         {/* Logo Section */}
-//         <div className="flex flex-col items-center justify-center mt-7">
-//           <img
-//             src={logo}
-//             alt="StudyVerse Logo"
-//             className="h-100 w-100 object-contain"
-//           />
-//           {/* <h1 className="text-xl font-bold mt-2 text-gray-800 dark:text-white">
-//             StudyVerse
-//           </h1> */}
-//         </div>
-
-//         {/* Navigation Links */}
-//         <div className="space-y-2">
-//           <Link
-//             to="dashboard"
-//             className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-//           >
-//             <ChartNoAxesColumn size={24} />
-//             <h1 className="text-lg">Dashboard</h1>
-//           </Link>
-//           <Link
-//             to="course"
-//             className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-//           >
-//             <SquareLibrary size={24} />
-//             <h1 className="text-lg">Courses</h1>
-//           </Link>
-//         </div>
-//       </div>
-
-//       {/* Main Content Area */}
-//       <div className="flex-1 p-10">
-//         <Outlet />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
-
-
-
-// import { ChartNoAxesColumn, SquareLibrary, Users } from "lucide-react";
-// import React from "react";
-// import { Link, Outlet } from "react-router-dom";
-// import logo from "@/assets/logo.jpg";
-
-// const Sidebar = () => {
-//   return (
-//     <div className="flex">
-//       {/* Sidebar */}
-//       <div className="hidden lg:flex flex-col w-[250px] sm:w-[300px] border-r border-gray-300 dark:border-gray-700 p-5 sticky top-0 h-screen bg-white dark:bg-gray-900 shadow-lg">
-//         {/* Logo Section */}
-//         <div className="flex flex-col items-center justify-center mt-7">
-//           <img
-//             src={logo}
-//             alt="StudyVerse Logo"
-//             className="h-100 w-100 object-contain"
-//           />
-//           {/* <h1 className="text-xl font-bold mt-2 text-gray-800 dark:text-white">
-//             StudyVerse
-//           </h1> */}
-//         </div>
-
-//         {/* Navigation Links */}
-//         <div className="space-y-2">
-//           <Link
-//             to="dashboard"
-//             className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-//           >
-//             <ChartNoAxesColumn size={24} />
-//             <h1 className="text-lg">Dashboard</h1>
-//           </Link>
-//           <Link
-//             to="course"
-//             className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-//           >
-//             <SquareLibrary size={24} />
-//             <h1 className="text-lg">Courses</h1>
-//           </Link>
-//           <Link
-//             to="course-reviews"
-//             className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-//           >
-//             <Users size={24} />
-//             <h1 className="text-lg">Course Reviews</h1>
-//           </Link>
-//         </div>
-//       </div>
-
-//       {/* Main Content Area */}
-//       <div className="flex-1 p-10">
-//         <Outlet />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
-
-// src/components/Sidebar.js
-import { ChartNoAxesColumn, SquareLibrary, Users } from "lucide-react";
-import React from "react";
+import {
+  ChartNoAxesColumn,
+  SquareLibrary,
+  Users,
+  ListChecks,
+  Menu,
+} from "lucide-react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
 
 const Sidebar = () => {
-  return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div className="hidden lg:flex flex-col w-[250px] sm:w-[300px] border-r border-gray-300 dark:border-gray-700 p-5 sticky top-0 h-screen bg-white dark:bg-gray-900 shadow-lg">
-        {/* Logo Section */}
-        <div className="flex flex-col items-center justify-center mt-7">
-          <img
-            src={logo}
-            alt="StudyVerse Logo"
-            className="h-100 w-100 object-contain"
-          />
-        </div>
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-        {/* Navigation Links */}
-        <div className="space-y-2">
-          <Link
-            to="dashboard"
-            className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            <ChartNoAxesColumn size={24} />
-            <h1 className="text-lg">Dashboard</h1>
-          </Link>
-          <Link
-            to="course"
-            className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            <SquareLibrary size={24} />
-            <h1 className="text-lg">Courses</h1>
-          </Link>
-          <Link
-            to="course-reviews"
-            className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            <Users size={24} />
-            <h1 className="text-lg">Course Reviews</h1>
-          </Link> <Link
-            to="manage-courses"
-            className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            <SquareLibrary size={24} />
-            <h1 className="text-lg">Manage Courses</h1>
-          </Link>
-          <Link
-            to="users"
-            className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            <Users size={24} />
-            <h1 className="text-lg">Users</h1>
+  const toggleSidebar = () => {
+    setIsMobileOpen(!isMobileOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsMobileOpen(false);
+  };
+
+  const navItems = (
+    <nav className="space-y-2">
+      <Link
+        to="dashboard"
+        onClick={closeSidebar}
+        className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        <ChartNoAxesColumn size={24} />
+        <h1 className="text-lg">Dashboard</h1>
+      </Link>
+      <Link
+        to="course"
+        onClick={closeSidebar}
+        className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        <SquareLibrary size={24} />
+        <h1 className="text-lg">Courses</h1>
+      </Link>
+      <Link
+        to="course-reviews"
+        onClick={closeSidebar}
+        className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        <Users size={24} />
+        <h1 className="text-lg">Course Reviews</h1>
+      </Link>
+      <Link
+        to="manage-courses"
+        onClick={closeSidebar}
+        className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        <SquareLibrary size={24} />
+        <h1 className="text-lg">Manage Courses</h1>
+      </Link>
+      <Link
+        to="users"
+        onClick={closeSidebar}
+        className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        <Users size={24} />
+        <h1 className="text-lg">Users</h1>
+      </Link>
+      <Link
+        to="quiz-management"
+        onClick={closeSidebar}
+        className="flex items-center gap-3 p-3 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        <ListChecks size={24} />
+        <h1 className="text-lg">Quiz Management</h1>
+      </Link>
+    </nav>
+  );
+
+  return (
+    <div className="flex min-h-screen">
+      {/* Mobile Topbar */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-20 flex items-center justify-between bg-white dark:bg-gray-900 px-4 py-3 shadow-md">
+        <button onClick={toggleSidebar}>
+          <Menu size={28} />
+        </button>
+        <img src={logo} alt="StudyVerse Logo" className="h-12 w-auto" />
+      </div>
+
+      {/* Sidebar for large screens */}
+      <aside className="hidden lg:flex flex-col w-[250px] sm:w-[300px] bg-white dark:bg-gray-900 border-r border-gray-300 dark:border-gray-700 p-5 sticky top-0 h-screen shadow-lg">
+        <div className="flex flex-col items-center justify-center mt-8 mb-8">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="StudyVerse Logo"
+              className="w-48 h-auto object-contain"
+            />
           </Link>
         </div>
-      </div>
+        {navItems}
+      </aside>
+
+      {/* Sidebar drawer for mobile */}
+      {isMobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-30 bg-black bg-opacity-50"
+          onClick={closeSidebar}
+        >
+          <aside
+            className="absolute left-0 top-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg p-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-center mb-6">
+              <Link to="/">
+                <img
+                  src={logo}
+                  alt="StudyVerse Logo"
+                  className="w-40 h-auto object-contain"
+                />
+              </Link>
+            </div>
+            {navItems}
+          </aside>
+        </div>
+      )}
 
       {/* Main Content Area */}
-      <div className="flex-1 p-10">
+      <main className="flex-1 pt-20 lg:pt-0 p-4 sm:p-6 md:p-10 bg-white dark:bg-gray-950 w-full">
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };

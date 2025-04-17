@@ -24,10 +24,9 @@ const CourseTable = () => {
     refetch();
   }, [refetch]);
 
-  const createCourseHandler = async () => {
+  const createCourseHandler = () => {
     navigate("create");
 
-    // Wait for a short delay before refetching to ensure data is updated
     setTimeout(() => {
       refetch();
       toast.success("New course added!", { style: { color: "green" } });
@@ -36,16 +35,17 @@ const CourseTable = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-40">
-        <h1 className="text-lg font-semibold">Loading...</h1>
+      <div className="flex justify-center items-center h-40 mt-20">
+        <h1 className="text-lg font-semibold dark:text-white">Loading...</h1>
       </div>
     );
 
   return (
-    <div className="mt-10 bg-white shadow-lg rounded-lg p-6">
-      {/* Header Section */}
+    <div className="mt-24 bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 transition-all">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Exisitng Courses</h2>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+          Existing Courses
+        </h2>
         <Button
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={createCourseHandler}
@@ -55,34 +55,36 @@ const CourseTable = () => {
         </Button>
       </div>
 
-      {/* Course Table */}
       <div className="overflow-x-auto">
-        <Table className="min-w-full border border-gray-200 rounded-lg">
-          <TableCaption className="text-gray-600 font-semibold">
+        <Table className="min-w-full border border-gray-200 dark:border-gray-700 rounded-lg">
+          <TableCaption className="text-gray-600 dark:text-gray-400 font-semibold">
             A list of your recent courses
           </TableCaption>
-          <TableHeader className="bg-gray-100">
+          <TableHeader className="bg-gray-100 dark:bg-gray-800">
             <TableRow>
-              <TableHead className="w-[100px] font-bold text-gray-800">
+              <TableHead className="w-[100px] font-bold text-gray-800 dark:text-white">
                 Price
               </TableHead>
-              <TableHead className="font-bold text-gray-800">Status</TableHead>
-              <TableHead className="font-bold text-gray-800">Title</TableHead>
-              <TableHead className="text-right font-bold text-gray-800">
+              <TableHead className="font-bold text-gray-800 dark:text-white">
+                Status
+              </TableHead>
+              <TableHead className="font-bold text-gray-800 dark:text-white">
+                Title
+              </TableHead>
+              <TableHead className="text-right font-bold text-gray-800 dark:text-white">
                 Action
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.courses.map((course) => (
+            {data?.courses?.map((course) => (
               <TableRow
                 key={course._id}
-                className="hover:bg-gray-50 transition-all"
+                className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
               >
-                <TableCell className="font-medium text-gray-700">
+                <TableCell className="font-medium text-gray-700 dark:text-gray-300">
                   {course?.coursePrice ? `$${course.coursePrice}` : "NA"}
                 </TableCell>
-
                 <TableCell>
                   <Badge
                     className={`${
@@ -92,14 +94,14 @@ const CourseTable = () => {
                     {course.isPublished ? "Published" : "Draft"}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-gray-700">
+                <TableCell className="text-gray-700 dark:text-gray-300">
                   {course.courseTitle}
                 </TableCell>
                 <TableCell className="text-right">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-gray-400 text-gray-700 hover:bg-gray-200"
+                    className="border-gray-400 text-gray-700 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700"
                     onClick={() => navigate(`${course._id}`)}
                   >
                     <Edit size={18} />

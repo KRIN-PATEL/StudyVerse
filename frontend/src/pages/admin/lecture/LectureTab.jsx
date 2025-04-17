@@ -135,9 +135,10 @@ const LectureTab = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              
               <div>
-                <Label className="text-black-700 text-md font-bold">Title</Label>
+                <Label className="text-black-700 text-md font-bold">
+                  Title
+                </Label>
                 <Input
                   value={lectureTitle}
                   onChange={(e) => setLectureTitle(e.target.value)}
@@ -146,7 +147,6 @@ const LectureTab = () => {
                 />
               </div>
 
-              
               <div className="mt-4">
                 <Label className="text-black-700 text-md font-bold">
                   Upload Video <span className="text-red-500">*</span>
@@ -160,18 +160,18 @@ const LectureTab = () => {
                 {mediaProgress && (
                   <div className="mt-3">
                     <Progress value={uploadProgress} />
-                    <p className="text-gray-600 text-sm">{uploadProgress}% uploaded</p>
+                    <p className="text-gray-600 text-sm">
+                      {uploadProgress}% uploaded
+                    </p>
                   </div>
                 )}
               </div>
 
-              
               <div className="flex items-center gap-3 mt-4">
                 <Switch checked={isFree} onCheckedChange={setIsFree} />
                 <Label className="text-gray-700">Is this video FREE?</Label>
               </div>
 
-              
               <div className="mt-6 flex justify-between">
                 <Button
                   disabled={isLoading}
@@ -215,7 +215,6 @@ const LectureTab = () => {
         </Card>
       </div>
 
-     
       {showDeleteDialog && (
         <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
           <DialogContent className="p-6">

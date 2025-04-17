@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/sheet";
 
 import logo from "../assets/logo.png";
-import { Dialog, DialogContent, DialogHeader, DialogFooter } from "./ui/dialog"; // Importing Modal
+import { Dialog, DialogContent, DialogHeader, DialogFooter } from "./ui/dialog";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogoutUserMutation } from "@/features/api/authApi";
@@ -58,14 +58,14 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="h-16 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200 dark:bg-gray-900 border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 right-0 duration-300 z-10 shadow-md">
+      <div className="h-20 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b dark:border-b-gray-700 border-b-gray-200 fixed top-0 left-0 right-0 duration-300 z-10 shadow-md">
         <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full px-6">
           {/* Logo & Title */}
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-3">
-              <Avatar className="h-20 w-20 mt-3">
+              <Avatar className="h-20 w-20">
                 <AvatarImage
-                  className="h-full w-full object-contain"
+                  className="h-full mt-2 w-full object-contain"
                   src={logo}
                   alt="Logo"
                 />
@@ -77,7 +77,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Navbar */}
           <div className="flex items-center gap-8">
             {user ? (
               <DropdownMenu>
@@ -97,7 +96,7 @@ const Navbar = () => {
                     </Avatar>
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
+                <DropdownMenuContent className="w-56 dark:bg-gray-800 dark:text-white">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
@@ -109,6 +108,9 @@ const Navbar = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Link to="/contact">Contact</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link to="/aboutus">About Us</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={logoutHandler}>
                       Logout
@@ -149,7 +151,7 @@ const Navbar = () => {
         {/* Mobile View */}
         <div className="flex md:hidden items-center justify-between px-4 h-full">
           <div className="flex items-center gap-2">
-            <Avatar className="h-12 w-12">
+            <Avatar className="h-16 w-16">
               <AvatarImage
                 className="h-full w-full object-cover"
                 src={logo}
@@ -168,7 +170,7 @@ const Navbar = () => {
       {/* Logout */}
       {showLogoutConfirm && (
         <Dialog open={showLogoutConfirm} onOpenChange={setShowLogoutConfirm}>
-          <DialogContent className="p-6">
+          <DialogContent className="p-6 dark:bg-gray-900 dark:text-white">
             <DialogHeader>
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                 Are you sure you want to logout?
@@ -200,6 +202,7 @@ export default Navbar;
 
 const MobileNavbar = () => {
   const role = "instructor";
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -211,22 +214,55 @@ const MobileNavbar = () => {
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col">
+      <SheetContent className="flex flex-col dark:bg-gray-900 dark:text-white">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
           <SheetTitle>StudyVerse</SheetTitle>
           <DarkMode />
         </SheetHeader>
-        <Separator className="mr-2" />
-        <nav className="flex flex-col space-y-4">
-          <span>My Learning</span>
-          <span>Edit Profile</span>
-          <span>Log Out</span>
-          <span>Log Out</span>
+        <Separator className="mr-2 mb-4" />
+
+        <nav className="flex flex-col space-y-4 text-lg">
+          <Link
+            to="/my-learning"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+          >
+            My Learning
+          </Link>
+          <Link
+            to="/profile"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+          >
+            Edit Profile
+          </Link>
+          <Link
+            to="/contact"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+          >
+            Contact
+          </Link>
+          <Link
+            to="/aboutus"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+          >
+            About Us
+          </Link>
+          <Link
+            to="/login"
+            className="hover:text-red-600 dark:hover:text-red-400 transition"
+          >
+            Log Out
+          </Link>
         </nav>
+
         {role === "instructor" && (
-          <SheetFooter>
+          <SheetFooter className="mt-6">
             <SheetClose asChild>
-              <Button type="submit">Dashboard</Button>
+              <Link
+                to="/admin/dashboard"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition"
+              >
+                Dashboard
+              </Link>
             </SheetClose>
           </SheetFooter>
         )}
