@@ -4,16 +4,15 @@ import dotenv from "dotenv";
 import connectDB from "./database/dbConnect.js";
 import userRoute from "./routes/user.routes.js";
 import courseRoute from "./routes/course.routes.js";
-import purchaseRoute from "./routes/purchaseCourse.route.js"
+import purchaseRoute from "./routes/purchaseCourse.route.js";
 import cors from "cors";
 import mediaRoute from "./routes/media.route.js";
 import { createCourse } from "./controllers/course.controller.js";
 dotenv.config({});
-import  CourseProgressRoute  from "./routes/courseProgress.route.js";
+import CourseProgressRoute from "./routes/courseProgress.route.js";
 import quizRoute from "./routes/quiz.routes.js";
 import certificateRoutes from "./routes/certificateRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
-
 
 connectDB();
 

@@ -10,7 +10,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import Lecture from "./Lecture";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 const CreateLecture = () => {
   const [lectureTitle, setLectureTitle] = useState("");
@@ -30,7 +36,9 @@ const CreateLecture = () => {
 
   const createLectureHandler = async () => {
     if (!lectureTitle.trim()) {
-      toast.error("Lecture title cannot be empty!", { style: { color: "red" } });
+      toast.error("Lecture title cannot be empty!", {
+        style: { color: "red" },
+      });
       return;
     }
     await createLecture({ lectureTitle, courseId });
@@ -40,7 +48,7 @@ const CreateLecture = () => {
     if (isSuccess) {
       refetch();
       toast.success(data.message, { style: { color: "green" } });
-      setLectureTitle(""); 
+      setLectureTitle("");
     }
     if (error) {
       toast.error(error.data.message, { style: { color: "red" } });
@@ -51,7 +59,9 @@ const CreateLecture = () => {
     <div className="flex justify-center items-center min-h-screen p-6">
       <Card className="w-full max-w-2xl p-6 shadow-lg border rounded-3xl">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Add New Lecture</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Add New Lecture
+          </CardTitle>
           <CardDescription className="text-center">
             Provide a title for your lecture and start creating content.
           </CardDescription>
@@ -70,14 +80,16 @@ const CreateLecture = () => {
             </div>
             <div className="flex justify-end gap-4 mt-4">
               <Button
-              className="border-black"
+                className="border-black"
                 variant="outline"
                 onClick={() => navigate(`/admin/course/${courseId}`)}
               >
                 Back to Course
               </Button>
-              <Button disabled={isLoading} onClick={createLectureHandler}
-              className="bg-blue-600 hover:bg-blue-700"
+              <Button
+                disabled={isLoading}
+                onClick={createLectureHandler}
+                className="bg-blue-600 hover:bg-blue-700"
               >
                 {isLoading ? (
                   <>
@@ -97,9 +109,13 @@ const CreateLecture = () => {
               {lectureLoading ? (
                 <p className="text-center">Loading lectures...</p>
               ) : lectureError ? (
-                <p className="text-red-500 text-center">Failed to load lectures.</p>
+                <p className="text-red-500 text-center">
+                  Failed to load lectures.
+                </p>
               ) : lectureData.lectures.length === 0 ? (
-                <p className="text-center font-bold text-black-500">No lectures available.</p>
+                <p className="text-center font-bold text-black-500">
+                  No lectures available.
+                </p>
               ) : (
                 <ul className="space-y-2">
                   {lectureData.lectures.map((lecture, index) => (

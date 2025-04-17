@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -135,5 +134,3 @@ const AddCourse = () => {
 };
 
 export default AddCourse;
-
-// solved error of publishing

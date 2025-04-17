@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Document,
@@ -8,7 +7,6 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-
 
 const logoUrl =
   "https://res.cloudinary.com/krinpatel/image/upload/v1742777966/cover_x3hke6.png";
@@ -87,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   totalAmount: {
-    backgroundColor: "#007bff", 
+    backgroundColor: "#007bff",
     color: "#fff",
     textAlign: "center",
     padding: 6,
@@ -152,11 +150,10 @@ export const InvoiceDocument = ({
         )
       ),
 
-      
       React.createElement(
         View,
         { style: styles.section },
-        
+
         React.createElement(
           View,
           { style: styles.section },
@@ -191,7 +188,6 @@ export const InvoiceDocument = ({
         )
       ),
 
-      
       React.createElement(
         View,
         { style: styles.tableHeader },
@@ -201,7 +197,6 @@ export const InvoiceDocument = ({
         React.createElement(Text, { style: styles.col4 }, "Amount")
       ),
 
-      
       React.createElement(
         View,
         { style: styles.tableRow },
@@ -211,7 +206,6 @@ export const InvoiceDocument = ({
         React.createElement(Text, { style: styles.col4 }, `$${unitPrice}`)
       ),
 
-      
       React.createElement(
         View,
         { style: styles.totals },
@@ -240,7 +234,6 @@ export const InvoiceDocument = ({
         )
       ),
 
-      
       React.createElement(
         View,
         { style: styles.note },
@@ -251,7 +244,6 @@ export const InvoiceDocument = ({
         )
       ),
 
-      
       React.createElement(
         View,
         { style: styles.footer },

@@ -87,7 +87,9 @@ export const logout = async (_, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const userId = req.id;
-    const user = await User.findById(userId).select("-password").populate("enrolledCourses");
+    const user = await User.findById(userId)
+      .select("-password")
+      .populate("enrolledCourses");
     if (!user) {
       return res.status(404).json({
         message: "Profile not found",
@@ -149,7 +151,6 @@ export const updateProfile = async (req, res) => {
     });
   }
 };
-
 
 //forgot testing
 export const verifyOTP = async (req, res) => {
@@ -264,10 +265,11 @@ export const resetPassword = async (req, res) => {
   }
 };
 
-
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password").populate("enrolledCourses");
+    const users = await User.find()
+      .select("-password")
+      .populate("enrolledCourses");
     return res.status(200).json({
       success: true,
       users,
@@ -307,5 +309,3 @@ export const deleteUser = async (req, res) => {
     });
   }
 };
-
-

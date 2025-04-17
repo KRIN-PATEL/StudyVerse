@@ -54,9 +54,13 @@ export const sendEmail = async (to, name, otp) => {
   }
 };
 
-
-
-export const sendInvoiceEmail = async (to, name, courseTitle, amount, paymentId) => {
+export const sendInvoiceEmail = async (
+  to,
+  name,
+  courseTitle,
+  amount,
+  paymentId
+) => {
   const date = new Date().toLocaleDateString();
   const timestamp = Date.now();
   const invoiceId = `INV-${timestamp}`; // Simple invoice ID

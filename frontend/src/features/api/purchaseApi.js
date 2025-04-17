@@ -43,5 +43,4 @@ export const {
   useGetCourseDetailWithStatusQuery,
   useGetPurchasedCoursesQuery,
   useGetDashboardStatsQuery,
-
 } = purchaseApi;

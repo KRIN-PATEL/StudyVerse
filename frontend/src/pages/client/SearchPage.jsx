@@ -28,7 +28,7 @@ const SearchPage = () => {
   const handleFilterChange = (categories, price) => {
     setSelectedCatgories(categories);
     setSortByPrice(price);
-    setPage(1); 
+    setPage(1);
   };
 
   return (
@@ -45,7 +45,9 @@ const SearchPage = () => {
         <Filter handleFilterChange={handleFilterChange} />
         <div className="flex-1">
           {isLoading ? (
-            Array.from({ length: 3 }).map((_, idx) => <CourseSkeleton key={idx} />)
+            Array.from({ length: 3 }).map((_, idx) => (
+              <CourseSkeleton key={idx} />
+            ))
           ) : isEmpty ? (
             <CourseNotFound />
           ) : (
@@ -54,7 +56,6 @@ const SearchPage = () => {
                 <SearchResult key={course._id} course={course} />
               ))}
 
-              
               {data?.total > limit && (
                 <div className="flex justify-center mt-8 gap-4">
                   <Button
@@ -89,7 +90,6 @@ export default SearchPage;
 const CourseNotFound = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-32 dark:bg-gray-900 p-6">
-    
       <AlertCircle className="text-red-500 h-16 w-16 mb-4" />
       <h1 className="font-bold text-2xl md:text-4xl text-gray-800 dark:text-gray-200 mb-2">
         Course Not Found

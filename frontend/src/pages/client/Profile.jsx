@@ -40,7 +40,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      setName(user.name || ""); 
+      setName(user.name || ""); // Populate form with user data
     }
   }, [user]);
 

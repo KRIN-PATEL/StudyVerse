@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/input-otp";
 
 const VerifyOTP = () => {
-  
+  // OTP input state
   const [otp, setOtp] = useState("");
   const { state } = useLocation();
   const email = state?.email;

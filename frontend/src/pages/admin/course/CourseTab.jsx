@@ -82,7 +82,7 @@ const CourseTab = () => {
           course.category &&
           course.courseLevel &&
           course.coursePrice &&
-          course.lectures.length > 0 
+          course.lectures.length > 0
       );
     }
   }, [courseByIdData]);
@@ -91,13 +91,13 @@ const CourseTab = () => {
     try {
       const response = await deleteCourse(courseId);
       if (response.data) {
-        toast.success(response.data.message, {style: {color: "green"}});
-        navigate("/admin/course"); 
+        toast.success(response.data.message, { style: { color: "green" } });
+        navigate("/admin/course");
       }
     } catch (error) {
       toast.error(error?.data?.message || "Failed to delete course");
     }
-    setShowDeleteDialog(false); 
+    setShowDeleteDialog(false);
   };
   const [previewThumbnail, setPreviewThumbnail] = useState("");
   // const navigate = useNavigate();
@@ -146,19 +146,23 @@ const CourseTab = () => {
       const response = await publishCourse({ courseId, query: action });
       if (response.data) {
         refetch();
-        toast.success(response.data.message, {style: {color: "green"}});
+        toast.success(response.data.message, { style: { color: "green" } });
       }
     } catch (error) {
-      toast.error("Failed to publish course", {stylele: {color: "red"}});
+      toast.error("Failed to publish course", { stylele: { color: "red" } });
     }
   };
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(data.message || "Course updated successfully.", {style: {color: "green"}});
+      toast.success(data.message || "Course updated successfully.", {
+        style: { color: "green" },
+      });
     }
     if (error) {
-      toast.error(error.data.message || "Failed to update course", {style: {color: "red"}});
+      toast.error(error.data.message || "Failed to update course", {
+        style: { color: "red" },
+      });
     }
   }, [isSuccess, error]);
 
@@ -175,7 +179,7 @@ const CourseTab = () => {
         </div>
         <div className="space-x-2">
           <Button
-          className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white"
+            className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white"
             disabled={!coursePublish}
             variant="outline"
             onClick={() =>
@@ -289,7 +293,9 @@ const CourseTab = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel className="font-bold">Course Level</SelectLabel>
+                    <SelectLabel className="font-bold">
+                      Course Level
+                    </SelectLabel>
                     <SelectItem value="Beginner">Beginner</SelectItem>
                     <SelectItem value="Medium">Medium</SelectItem>
                     <SelectItem value="Advance">Advance</SelectItem>
@@ -326,14 +332,18 @@ const CourseTab = () => {
             )}
           </div>
           <div>
-            <Button onClick={() => navigate("/admin/course")} variant="outline"
+            <Button
+              onClick={() => navigate("/admin/course")}
+              variant="outline"
               className="border-black"
-              >
+            >
               Cancel
             </Button>{" "}
             &nbsp;
-            <Button disabled={isLoading} onClick={updateCourseHandler}
-            className="bg-blue-600 hover:bg-blue-700"
+            <Button
+              disabled={isLoading}
+              onClick={updateCourseHandler}
+              className="bg-blue-600 hover:bg-blue-700"
             >
               {isLoading ? (
                 <>

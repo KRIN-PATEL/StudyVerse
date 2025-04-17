@@ -3,7 +3,7 @@ import { Course } from "../models/course.model.js";
 import { CoursePurchase } from "../models/coursePurchase.model.js";
 import { Lecture } from "../models/lecture.model.js";
 import { User } from "../models/user.model.js";
-import { sendInvoiceEmail } from "../utils/mailer.js"; 
+import { sendInvoiceEmail } from "../utils/mailer.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -34,7 +34,7 @@ export const createCheckoutSession = async (req, res) => {
               name: course.courseTitle,
               images: [course.courseThumbnail],
             },
-            unit_amount: course.coursePrice * 100, 
+            unit_amount: course.coursePrice * 100,
           },
           quantity: 1,
         },
@@ -47,7 +47,7 @@ export const createCheckoutSession = async (req, res) => {
         userId: userId,
       },
       shipping_address_collection: {
-        allowed_countries: ["CA"], 
+        allowed_countries: ["CA"],
       },
     });
 
@@ -118,34 +118,31 @@ export const stripeWebhook = async (req, res) => {
 
       await purchase.save();
 
-// Update user's enrolledCourses
-await User.findByIdAndUpdate(
-  purchase.userId,
-  { $addToSet: { enrolledCourses: purchase.courseId._id } },
-  { new: true }
-);
+      // Update user's enrolledCourses
+      await User.findByIdAndUpdate(
+        purchase.userId,
+        { $addToSet: { enrolledCourses: purchase.courseId._id } },
+        { new: true }
+      );
 
-// Update course to add user ID to enrolledStudents
-await Course.findByIdAndUpdate(
-  purchase.courseId._id,
-  { $addToSet: { enrolledStudents: purchase.userId } },
-  { new: true }
-);
+      // Update course to add user ID to enrolledStudents
+      await Course.findByIdAndUpdate(
+        purchase.courseId._id,
+        { $addToSet: { enrolledStudents: purchase.userId } },
+        { new: true }
+      );
 
+      const user = await User.findById(purchase.userId);
 
-const user = await User.findById(purchase.userId);
-
-
-if (user && user.email && purchase.courseId) {
-  await sendInvoiceEmail(
-    user.email,
-    user.name || "Student",
-    purchase.courseId.courseTitle,
-    purchase.amount,
-    purchase.paymentId
-  );
-}
-
+      if (user && user.email && purchase.courseId) {
+        await sendInvoiceEmail(
+          user.email,
+          user.name || "Student",
+          purchase.courseId.courseTitle,
+          purchase.amount,
+          purchase.paymentId
+        );
+      }
     } catch (error) {
       console.error("Error handling event:", error);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -170,7 +167,9 @@ export const getCourseDetailWithPurchaseStatus = async (req, res) => {
     const purchased = await CoursePurchase.findOne({ userId, courseId });
 
     // Check if user already rated the course
-    const userRating = course.ratings.find(r => r.userId.toString() === userId);
+    const userRating = course.ratings.find(
+      (r) => r.userId.toString() === userId
+    );
     const isRatedByUser = !!userRating;
     const userRatingValue = userRating?.rating || 0;
 
@@ -228,12 +227,23 @@ export const getDashboardStats = async (req, res) => {
           enrollments: { $sum: 1 },
         },
       },
-      { $sort: { "_id": 1 } },
+      { $sort: { _id: 1 } },
     ]);
 
     const monthNames = [
-      "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      "",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
 
     const courseEnrollmentData = monthlyStats.map((stat) => ({

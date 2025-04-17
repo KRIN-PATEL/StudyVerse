@@ -15,28 +15,36 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { useGetDashboardStatsQuery, useGetPurchasedCoursesQuery } from "@/features/api/purchaseApi";
+import {
+  useGetDashboardStatsQuery,
+  useGetPurchasedCoursesQuery,
+} from "@/features/api/purchaseApi";
 import React from "react";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF6384", "#36A2EB"];
+const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#FF6384",
+  "#36A2EB",
+];
 
 const Dashboard = () => {
   const { data: statsData, isLoading, isError } = useGetDashboardStatsQuery();
-  const { data: purchaseData, isLoading: isPurchaseLoading } = useGetPurchasedCoursesQuery();
+  const { data: purchaseData, isLoading: isPurchaseLoading } =
+    useGetPurchasedCoursesQuery();
 
   if (isLoading || isPurchaseLoading) {
     return <p className="text-center mt-20 text-xl">Loading Dashboard...</p>;
   }
 
   if (isError) {
-    return <p className="text-center mt-20 text-red-500">Failed to load stats.</p>;
+    return (
+      <p className="text-center mt-20 text-red-500">Failed to load stats.</p>
+    );
   }
 
   const {
@@ -46,14 +54,15 @@ const Dashboard = () => {
     monthlyActiveUsersData,
   } = statsData;
 
-  const coursePriceData = (purchaseData?.purchasedCourse || []).map((course) => ({
-    name: course.courseId?.courseTitle,
-    price: course.courseId?.coursePrice,
-  }));
+  const coursePriceData = (purchaseData?.purchasedCourse || []).map(
+    (course) => ({
+      name: course.courseId?.courseTitle,
+      price: course.courseId?.coursePrice,
+    })
+  );
 
   return (
     <div className="grid gap-6 grid-cols-1 mt-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-black-700 dark:text-gray-300">
@@ -62,69 +71,71 @@ const Dashboard = () => {
         </CardHeader>
         <CardContent>
           <p className="text-black-600 dark:text-gray-400 font-bold">
-            Overview of Study Verse statistics including enrollments, revenue, and user activity.
+            Overview of Study Verse statistics including enrollments, revenue,
+            and user activity.
           </p>
         </CardContent>
       </Card>
 
-<Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-  <CardHeader>
-    <CardTitle>Total Sales</CardTitle>
-  </CardHeader>
-  <CardContent>
-    <p className="text-3xl font-bold text-blue-600">{purchaseData?.purchasedCourse?.length || 0}</p>
-  </CardContent>
-</Card>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <CardHeader>
+          <CardTitle>Total Sales</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-3xl font-bold text-blue-600">
+            {purchaseData?.purchasedCourse?.length || 0}
+          </p>
+        </CardContent>
+      </Card>
 
-<Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-  <CardHeader>
-    <CardTitle>Total Revenue</CardTitle>
-  </CardHeader>
-  <CardContent>
-    <p className="text-3xl font-bold text-blue-600">
-      $
-      {purchaseData?.purchasedCourse?.reduce(
-        (acc, el) => acc + (el.amount || 0),
-        0
-      )}
-    </p>
-  </CardContent>
-</Card>
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <CardHeader>
+          <CardTitle>Total Revenue</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-3xl font-bold text-blue-600">
+            $
+            {purchaseData?.purchasedCourse?.reduce(
+              (acc, el) => acc + (el.amount || 0),
+              0
+            )}
+          </p>
+        </CardContent>
+      </Card>
 
-
-<Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full bg-white dark:bg-gray-900">
-  <CardHeader>
-    <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
-      Course Prices (Purchased Courses)
-    </CardTitle>
-  </CardHeader>
-  <CardContent>
-  <ResponsiveContainer width="100%" height={300}> {/* Increase height */}
-  <LineChart data={coursePriceData}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis
-      dataKey="name"
-      angle={-45}
-      textAnchor="end"
-      interval={0} // Show all labels
-      height={80} // Give more space for rotated labels
-      stroke="#6b7280"
-    />
-    <YAxis stroke="#6b7280" />
-    <Tooltip formatter={(value, name) => [`₹${value}`, name]} />
-    <Line
-      type="monotone"
-      dataKey="price"
-      stroke="#4a90e2"
-      strokeWidth={3}
-      dot={{ stroke: "#4a90e2", strokeWidth: 2 }}
-    />
-  </LineChart>
-</ResponsiveContainer>
-
-  </CardContent>
-</Card>
-
+      <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full bg-white dark:bg-gray-900">
+        <CardHeader>
+          <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
+            Course Prices (Purchased Courses)
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            {" "}
+            {/* Increase height */}
+            <LineChart data={coursePriceData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="name"
+                angle={-45}
+                textAnchor="end"
+                interval={0} // Show all labels
+                height={80} // Give more space for rotated labels
+                stroke="#6b7280"
+              />
+              <YAxis stroke="#6b7280" />
+              <Tooltip formatter={(value, name) => [`₹${value}`, name]} />
+              <Line
+                type="monotone"
+                dataKey="price"
+                stroke="#4a90e2"
+                strokeWidth={3}
+                dot={{ stroke: "#4a90e2", strokeWidth: 2 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
@@ -144,7 +155,6 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
@@ -164,7 +174,6 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-700 dark:text-gray-300">
@@ -183,7 +192,10 @@ const Dashboard = () => {
                 outerRadius={90}
               >
                 {courseCategoryData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />
@@ -207,7 +219,6 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 col-span-full lg:col-span-2 bg-white dark:bg-gray-900">
         <CardHeader>
           <CardTitle className="text-lg font-bold text-black-700 dark:text-gray-300">
@@ -230,8 +241,6 @@ const Dashboard = () => {
           </ResponsiveContainer>
         </CardContent>
       </Card>
-
-     
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import CountUp from "react-countup";
 
+// Importing images from src/assets
 import harshImg from "@/assets/harsh.jpg";
 import yashImg from "@/assets/yash.jpg";
 import krinImg from "@/assets/krin.jpg";
@@ -21,7 +22,7 @@ const teamMembers = [
   {
     name: "Krin Shaileshkumar Patel",
     role: "Full Stack Developer",
-    image: krinImg, 
+    image: krinImg,
     bio: "Focused on backend architecture and database management using Node.js and MongoDB.",
   },
 ];
@@ -35,10 +36,16 @@ const AboutUs = () => {
           Welcome to <span className="text-blue-600">StudyVerse</span>
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-          StudyVerse is an innovative, user-friendly, and scalable Learning Management System built using the MERN stack. We bridge the gap between instructors and students with features like secure authentication, dynamic dashboards, course enrollment, and integrated payment processing.
+          StudyVerse is an innovative, user-friendly, and scalable Learning
+          Management System built using the MERN stack. We bridge the gap
+          between instructors and students with features like secure
+          authentication, dynamic dashboards, course enrollment, and integrated
+          payment processing.
         </p>
         <p className="mt-4 text-md text-gray-500 dark:text-gray-400">
-          Our platform empowers learners and educators through seamless experiences, modern design, and robust backend capabilities — all while nurturing collaboration and portfolio development.
+          Our platform empowers learners and educators through seamless
+          experiences, modern design, and robust backend capabilities — all
+          while nurturing collaboration and portfolio development.
         </p>
       </div>
 
@@ -48,7 +55,8 @@ const AboutUs = () => {
           Meet the Team
         </h2>
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          We're a team of passionate developers dedicated to crafting impactful tech solutions for modern education.
+          We're a team of passionate developers dedicated to crafting impactful
+          tech solutions for modern education.
         </p>
       </div>
 
@@ -64,7 +72,9 @@ const AboutUs = () => {
           <h3 className="text-4xl font-bold text-blue-600 dark:text-blue-400">
             <CountUp end={10} duration={2.5} />+
           </h3>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">Technologies Used</p>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
+            Technologies Used
+          </p>
         </div>
         <div className="p-6 rounded-xl bg-blue-50 dark:bg-gray-800 shadow-md">
           <h3 className="text-4xl font-bold text-blue-600 dark:text-blue-400">
@@ -80,7 +90,10 @@ const AboutUs = () => {
           <div
             key={idx}
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl animate-fadeIn"
-            style={{ animationDelay: `${idx * 150}ms`, animationFillMode: "both" }}
+            style={{
+              animationDelay: `${idx * 150}ms`,
+              animationFillMode: "both",
+            }}
           >
             <img
               src={member.image}

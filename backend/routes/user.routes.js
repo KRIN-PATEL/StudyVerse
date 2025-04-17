@@ -27,8 +27,7 @@ router
 router.route("/forgot-password").post(forgotPassword);
 router.route("/verify-otp").post(verifyOTP);
 router.route("/reset-password").post(resetPassword);
-router.route("/users").get(getUsers); 
-router.route("/users/:userId").delete(deleteUser); 
-
+router.route("/users").get(getUsers);
+router.route("/users/:userId").delete(deleteUser);
 
 export default router;

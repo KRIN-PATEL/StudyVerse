@@ -23,11 +23,12 @@ const ReviewTable = () => {
   };
 
   const handleResetClick = () => {
-    setSelectedRating(null);  // Reset the selected rating filter
+    setSelectedRating(null); // Reset the selected rating filter
   };
 
   if (isLoading) return <p className="text-center mt-10">Loading reviews...</p>;
-  if (isError) return <p className="text-center text-red-500">Failed to load reviews</p>;
+  if (isError)
+    return <p className="text-center text-red-500">Failed to load reviews</p>;
 
   return (
     <div className="flex flex-col lg:flex-row items-start gap-6 px-4 py-6 sm:px-6 md:px-10 mx-auto max-w-7xl">
@@ -35,7 +36,9 @@ const ReviewTable = () => {
       <div className="w-full lg:w-60 p-4 bg-white dark:bg-gray-900 shadow rounded-lg border border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2 mb-4">
           <Filter className="text-blue-600" size={20} />
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Filter by Rating</h2>
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+            Filter by Rating
+          </h2>
         </div>
 
         <div className="space-y-3">
@@ -74,7 +77,9 @@ const ReviewTable = () => {
         </div>
 
         {filteredCourses?.length === 0 ? (
-          <p className="text-gray-600 mt-4">No courses match the selected rating.</p>
+          <p className="text-gray-600 mt-4">
+            No courses match the selected rating.
+          </p>
         ) : (
           filteredCourses?.map((course) => (
             <div
@@ -89,7 +94,9 @@ const ReviewTable = () => {
                   className="w-20 h-20 rounded-md object-cover border"
                 />
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{course.courseTitle}</h2>
+                  <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                    {course.courseTitle}
+                  </h2>
                   <div className="flex items-center gap-2 mt-1">
                     {course.creator?.photoUrl && (
                       <img
@@ -99,7 +106,10 @@ const ReviewTable = () => {
                       />
                     )}
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Created by <span className="font-semibold">{course.creator?.name}</span>
+                      Created by{" "}
+                      <span className="font-semibold">
+                        {course.creator?.name}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -119,7 +129,12 @@ const ReviewTable = () => {
                     </p>
                     <div className="flex items-center text-yellow-500 font-semibold">
                       {r.rating}
-                      <Star size={16} fill="#FACC15" stroke="#FACC15" className="ml-1" />
+                      <Star
+                        size={16}
+                        fill="#FACC15"
+                        stroke="#FACC15"
+                        className="ml-1"
+                      />
                     </div>
                   </div>
                 ))}
