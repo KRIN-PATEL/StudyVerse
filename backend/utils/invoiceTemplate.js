@@ -1,147 +1,3 @@
-// import React from "react";
-// import {
-//   Document,
-//   Page,
-//   Text,
-//   View,
-//   StyleSheet,
-//   Image,
-// } from "@react-pdf/renderer";
-
-// const logoUrl = "https://res.cloudinary.com/krinpatel/image/upload/v1742777966/cover_x3hke6.png";
-
-// const styles = StyleSheet.create({
-//   page: {
-//     padding: 40,
-//     fontSize: 12,
-//     fontFamily: "Helvetica",
-//     backgroundColor: "#ffffff",
-//   },
-//   logoContainer: {
-//     alignItems: "center",
-//     marginBottom: 20,
-//   },
-//   logo: {
-//     width: 130,
-//   },
-//   title: {
-//     textAlign: "center",
-//     fontSize: 20,
-//     marginBottom: 20,
-//     color: "#007bff",
-//     fontWeight: "bold",
-//   },
-//   section: {
-//     marginBottom: 20,
-//     padding: 12,
-//     border: "1px solid #e0e0e0",
-//     borderRadius: 5,
-//     backgroundColor: "#f9f9f9",
-//   },
-//   sectionTitle: {
-//     fontSize: 14,
-//     marginBottom: 10,
-//     fontWeight: "bold",
-//     color: "#444",
-//     borderBottom: "1px solid #ccc",
-//     paddingBottom: 4,
-//   },
-//   row: {
-//     marginBottom: 10,
-//   },
-//   label: {
-//     fontWeight: "bold",
-//     color: "#333",
-//     marginBottom: 2,
-//   },
-//   value: {
-//     color: "#333",
-//     wordBreak: "break-word", // Ensures long values like paymentId wrap
-//   },
-//   footer: {
-//     textAlign: "center",
-//     fontSize: 10,
-//     marginTop: 40,
-//     color: "#666",
-//     borderTop: "1px solid #eee",
-//     paddingTop: 10,
-//   },
-//   brandText: {
-//     fontSize: 12,
-//     marginTop: 4,
-//     fontWeight: "bold",
-//     color: "#007bff",
-//   },
-// });
-
-// export const InvoiceDocument = ({
-//   name,
-//   course,
-//   amount,
-//   date,
-//   email,
-//   paymentId,
-//   invoiceId,
-// }) => (
-//   React.createElement(Document, null,
-//     React.createElement(Page, { style: styles.page },
-
-//       // Logo
-//       React.createElement(View, { style: styles.logoContainer },
-//         React.createElement(Image, { src: logoUrl, style: styles.logo })
-//       ),
-
-//       // Title
-//       React.createElement(Text, { style: styles.title }, "Course Invoice"),
-
-//       // Billed To
-//       React.createElement(View, { style: styles.section },
-//         React.createElement(Text, { style: styles.sectionTitle }, "Billed To"),
-//         React.createElement(Text, { style: styles.label }, "Name:"),
-//         React.createElement(Text, { style: styles.value }, name),
-//         React.createElement(Text, { style: styles.label }, "Email:"),
-//         React.createElement(Text, { style: styles.value }, email)
-//       ),
-
-//       // Invoice Details
-//       React.createElement(View, { style: styles.section },
-//         React.createElement(Text, { style: styles.sectionTitle }, "Invoice Details"),
-
-//         React.createElement(View, { style: styles.row },
-//           React.createElement(Text, { style: styles.label }, "Invoice ID:"),
-//           React.createElement(Text, { style: styles.value }, invoiceId)
-//         ),
-
-//         React.createElement(View, { style: styles.row },
-//           React.createElement(Text, { style: styles.label }, "Payment ID:"),
-//           React.createElement(Text, { style: styles.value }, paymentId)
-//         ),
-
-//         React.createElement(View, { style: styles.row },
-//           React.createElement(Text, { style: styles.label }, "Course:"),
-//           React.createElement(Text, { style: styles.value }, course)
-//         ),
-
-//         React.createElement(View, { style: styles.row },
-//           React.createElement(Text, { style: styles.label }, "Amount Paid:"),
-//           React.createElement(Text, { style: styles.value }, `$${amount}`)
-//         ),
-
-//         React.createElement(View, { style: styles.row },
-//           React.createElement(Text, { style: styles.label }, "Date:"),
-//           React.createElement(Text, { style: styles.value }, date)
-//         )
-//       ),
-
-//       // Footer
-//       React.createElement(View, { style: styles.footer },
-//         React.createElement(Text, null, "Thank you for learning with StudyVerse."),
-//         React.createElement(Text, { style: styles.brandText }, "StudyVerse • Empowering Learners Worldwide")
-//       )
-//     )
-//   )
-// );
-
 import React from "react";
 import {
   Document,
@@ -152,7 +8,6 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
-// ✅ Public Logo URL
 const logoUrl =
   "https://res.cloudinary.com/krinpatel/image/upload/v1742777966/cover_x3hke6.png";
 
@@ -230,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   totalAmount: {
-    backgroundColor: "#007bff", // 🔵 Blue total box
+    backgroundColor: "#007bff",
     color: "#fff",
     textAlign: "center",
     padding: 6,
@@ -295,11 +150,10 @@ export const InvoiceDocument = ({
         )
       ),
 
-      // ✅ Bill To Left | Invoice Right
       React.createElement(
         View,
         { style: styles.section },
-        // ✅ All details on LEFT side
+
         React.createElement(
           View,
           { style: styles.section },
@@ -334,7 +188,6 @@ export const InvoiceDocument = ({
         )
       ),
 
-      // ✅ Table Header
       React.createElement(
         View,
         { style: styles.tableHeader },
@@ -344,7 +197,6 @@ export const InvoiceDocument = ({
         React.createElement(Text, { style: styles.col4 }, "Amount")
       ),
 
-      // ✅ Table Row
       React.createElement(
         View,
         { style: styles.tableRow },
@@ -354,7 +206,6 @@ export const InvoiceDocument = ({
         React.createElement(Text, { style: styles.col4 }, `$${unitPrice}`)
       ),
 
-      // ✅ Totals
       React.createElement(
         View,
         { style: styles.totals },
@@ -383,7 +234,6 @@ export const InvoiceDocument = ({
         )
       ),
 
-      // ✅ Note
       React.createElement(
         View,
         { style: styles.note },
@@ -394,7 +244,6 @@ export const InvoiceDocument = ({
         )
       ),
 
-      // ✅ Footer
       React.createElement(
         View,
         { style: styles.footer },
