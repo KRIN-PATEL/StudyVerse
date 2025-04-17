@@ -87,7 +87,9 @@ export const logout = async (_, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const userId = req.id;
-    const user = await User.findById(userId).select("-password").populate("enrolledCourses");
+    const user = await User.findById(userId)
+      .select("-password")
+      .populate("enrolledCourses");
     if (!user) {
       return res.status(404).json({
         message: "Profile not found",
@@ -106,69 +108,6 @@ export const getUserProfile = async (req, res) => {
     });
   }
 };
-// export const getUserProfile = async (req, res) => {
-//   try {
-//     const userId = req.id;
-//     const user = await User.findById(userId).select("-password").populate("enrolledCourses");
-//     if (!user) {
-//       return res.status(404).json({
-//         message: "Profile not found",
-//         success: false,
-//       });
-//     }
-//     return res.status(200).json({
-//       success: true,
-//       user,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Failed to load user",
-//     });
-//   }
-// };
-// export const updateProfile = async (req, res) => {
-//   try {
-//     const userId = req.id;
-//     const { name } = req.body;
-//     const profilePhoto = req.file;
-
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res.status(404).json({
-//         message: "User not found",
-//         success: false,
-//       });
-//     }
-
-//     if (user.photoUrl) {
-//       const publicId = user.photoUrl.split("/").pop().split(".")[0];
-//       deleteMediaFromCloudinary(publicId);
-//     }
-
-//     // upload new photo
-//     const cloudResponse = await uploadMedia(profilePhoto.path);
-//     const photoUrl = cloudResponse.secure_url;
-
-//     const updatedData = { name, photoUrl };
-//     const updatedUser = await User.findByIdAndUpdate(userId, updatedData, {
-//       new: true,
-//     }).select("-password");
-
-//     return res.status(200).json({
-//       success: true,
-//       user: updatedUser,
-//       message: "Profile updated successfully.",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Failed to update profile",
-//     });
-//   }
-// };
 
 export const updateProfile = async (req, res) => {
   try {
@@ -212,7 +151,6 @@ export const updateProfile = async (req, res) => {
     });
   }
 };
-
 
 //forgot testing
 export const verifyOTP = async (req, res) => {
@@ -327,10 +265,11 @@ export const resetPassword = async (req, res) => {
   }
 };
 
-
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password").populate("enrolledCourses");
+    const users = await User.find()
+      .select("-password")
+      .populate("enrolledCourses");
     return res.status(200).json({
       success: true,
       users,
@@ -343,21 +282,6 @@ export const getUsers = async (req, res) => {
     });
   }
 };
-// export const getUsers = async (req, res) => {
-//   try {
-//     const users = await User.find().select("-password");
-//     return res.status(200).json({
-//       success: true,
-//       users,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch users",
-//     });
-//   }
-// };
 
 export const deleteUser = async (req, res) => {
   try {
@@ -385,5 +309,3 @@ export const deleteUser = async (req, res) => {
     });
   }
 };
-
-

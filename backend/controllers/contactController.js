@@ -20,21 +20,7 @@ export const sendContactMessage = async (req, res) => {
     },
   });
 
-//   const mailOptions = {
-//     from: `"${name}" <${email}>`,
-//     to: process.env.SMTP_EMAIL,
-//     subject: `New Contact Form Message from ${name}`,
-//     html: `
-//       <div style="font-family: Arial, sans-serif;">
-//         <h3>New Contact Form Submission</h3>
-//         <p><strong>Name:</strong> ${name}</p>
-//         <p><strong>Email:</strong> ${email}</p>
-//         <p><strong>Message:</strong></p>
-//         <p>${message}</p>
-//       </div>
-//     `,
-//   };
-const mailOptions = {
+  const mailOptions = {
     from: `"${name}" <${email}>`,
     to: process.env.SMTP_EMAIL,
     subject: `New Contact Form Message from ${name}`,
@@ -60,11 +46,11 @@ const mailOptions = {
       {
         filename: "cover.png",
         path: path.join(__dirname, "../assets/cover.png"),
-        cid: "studyverse_logo", // Referenced in the <img src="cid:studyverse_logo">
+        cid: "studyverse_logo",
       },
     ],
   };
-  
+
   try {
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ message: "Message sent successfully!" });
